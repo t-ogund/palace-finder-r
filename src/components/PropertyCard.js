@@ -4,33 +4,35 @@ import {
     CardTitle, CardSubtitle, Button
   } from 'reactstrap';
 
+import tester from "../assets/tester-house.jpg";
+
 function PropertyCard() {
     return (
         <React.Fragment>
-            <Card>
-                <CardImg width="18rem" src="assets/tester-house.jpg" alt="Test Image" />
-                <CardBody>
-                    <div className="card-cost-and-details">
+            <Card className="display-card">
+                <CardImg top width="18rem" src={tester} alt="Test Image" />
+                <CardBody className="p-2">
+                    <div className="card-cost-and-details d-flex justify-content-between">
                         <div className="card-cost-container">
-                            <CardTitle tag="h3" className="card-cost">$3,200/mo</CardTitle>
+                            <CardTitle tag="h4" className="card-cost">$3,200/mo</CardTitle>
                         </div>
-                        <div className="card-details-container">
-                            <div class="card-beds-container">
-                                <CardText class="card-beds">4 bds</CardText>
+                        <div className="card-details-container d-flex">
+                            <div className="card-beds-container">
+                                <CardText className="card-beds">4 bds</CardText>
                             </div>
                             <div class="card-bath-container">
-                                <CardText class="card-baths">4 ba</CardText>
+                                <CardText className="card-baths">4 ba</CardText>
                             </div>
                             <div class="sqft-container">
-                                <CardText class="sqft">2,521 sqft</CardText>
+                                <CardText className="sqft">2,521 sqft</CardText>
                             </div>
                         </div>
-                        <div className="card-subtitle-container">
-                            <CardSubtitle tag="h4">Rental Property Address</CardSubtitle>
+                    </div>
+                    <div className="card-subtitle-container">
+                            <CardSubtitle tag="h6">Rental Property Address</CardSubtitle>
                         </div>
                         <div className="card-description-container">
-                            <CardSubtitle tag="h4">House for rent</CardSubtitle>
-                        </div>
+                            <CardText>House for rent</CardText>
                     </div>
                 </CardBody>
             </Card>
