@@ -11,7 +11,7 @@ function Splash() {
                 <Row className="d-flex justify-content-center align-items-center h-100">
                     <Col className="col-md-4">
                         <InputGroup className="">
-                            <Input className="sticky-top splash-input" />
+                            <Input className="splash-input" />
                             <InputGroupAddon addonType="append">
                                 <Button>Search</Button>
                             </InputGroupAddon>
