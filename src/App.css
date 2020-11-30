@@ -62,8 +62,38 @@
   margin-bottom: 2rem;
 }
 
-
-
 /* .tile {
   min-width: 20rem;
 } */
+
+/* BUY PAGE */
+.buy-filter-button {
+  margin: .3rem;
+}
+
+.buy-input {
+  margin: .3rem 0 .3rem 0;
+}
+
+.buy-add-on {
+  margin: .3rem 0 0 0;
+}
+
+.buy-input-buttons {
+  border-top: 1px solid rgb(226, 229, 235);
+  border-bottom: 1px solid rgb(226, 229, 235);
+  margin: 2rem 0 0 0;
+  padding: .3rem 0 .3rem 0;
+}
+
+.buy-subsection {
+  height: 100vh;
+}
+
+.map-row {
+  height: 100vh;
+}
+
+.house-hidden-spacer {
+  display: none;
+}
