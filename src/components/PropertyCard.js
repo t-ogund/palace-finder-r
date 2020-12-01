@@ -11,7 +11,7 @@ function PropertyCard(props) {
         <React.Fragment>
             <Card className="display-card">
                 <CardImg top width="18rem" src={tester} alt="Test Image" />
-                <CardBody className="p-2">
+                <CardBody className="p-2 card-body">
                     <div className="card-cost-and-details d-flex justify-content-between">
                         <div className="card-cost-container">
                             <CardTitle tag="h4" className="card-cost">{props.cost}</CardTitle>

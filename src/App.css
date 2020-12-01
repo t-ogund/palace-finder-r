@@ -1,6 +1,10 @@
 .display-card {
-  width: 20rem;
-  height: 17rem;
+  /* width: 20rem;
+  height: 17rem; */
+}
+
+.card-body {
+  border-bottom: 5px solid #0275d8;
 }
 
 .card-cost-and-details {

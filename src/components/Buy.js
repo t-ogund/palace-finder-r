@@ -55,25 +55,39 @@ class Buy extends React.Component {
                             </Row>
 
                             <Row>
-                                <Col className="result-subsection d-flex">
+                                <Col className="result-subsection d-flex justify-content-between">
                                     <div className="number-results">
                                         <p>Number results </p>
                                     </div>
                                     <div className="result-filter">
-                                        
+                                        <p>Sort By: Dropdown goes here</p>
                                     </div>
                                 </Col>
                             </Row>
 
                             <Row>
                                 <Col className="" lg={12}>
-                                    <PropertyCard />
-                                    <PropertyCard />
+                                    <Row className="bg-danger">
+                                        <Col className="bg-success" xl={6} lg={12} sm={6}>
+                                            <PropertyCard />
+                                        </Col>
+                                        <Col className="bg-info" xl={6} lg={12} sm={6}>
+                                            <PropertyCard />
+
+                                        </Col>
+                                    </Row>
+                                    <Row className="bg-warning">
+                                        <Col className="bg-success" xl={6} lg={12} sm={6}>
+                                            <PropertyCard />
+                                        </Col>
+                                        <Col className="bg-info" xl={6} lg={12} sm={6}>
+                                            <PropertyCard />
+                                        </Col>
+                                    </Row>
                                 </Col>
                             </Row>
                             {/* <h3>Hello</h3> */}
                             {/* <PropertyCard />
-                            <PropertyCard />
                             <PropertyCard />
 
                             <PropertyCard /> */}
