@@ -82,7 +82,7 @@
 .buy-input-buttons {
   border-top: 1px solid rgb(226, 229, 235);
   border-bottom: 1px solid rgb(226, 229, 235);
-  margin: 2rem 0 0 0;
+  margin: 3rem 0 0 0;
   padding: .3rem 0 .3rem 0;
 }
 
@@ -99,7 +99,8 @@
 } */
 
 .buy-display {
-  margin-top: 10rem; 
+  margin-top: 10rem;
+  /* display: flex; */
 }
 
 #house-area {
@@ -115,4 +116,10 @@
   width: 100vw;
   height: 100vh;
   position: relative;
+}
+
+@media only screen and (max-width: 1000px) {
+  #bed-bath, #home-type {
+    display: none;
+  }
 }
