@@ -94,6 +94,25 @@
   height: 100vh;
 }
 
-.house-hidden-spacer {
+/* .house-hidden-spacer {
   display: none;
+} */
+
+.buy-display {
+  margin-top: 10rem; 
+}
+
+#house-area {
+  margin-top: 160px;
+  box-shadow: -3px 4px 4px gray;
+}
+
+#left {
+  margin-top: 161px;
+}
+
+.map {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
 }

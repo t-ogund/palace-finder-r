@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
       return (
           <React.Fragment>
               <Container>
-                <Navbar className="bg-light">
+                <Navbar className="bg-light fixed-top">
                     <Nav>
                         <NavItem>
                             <NavLink tag={Link} to="/buy">
