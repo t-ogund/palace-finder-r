@@ -9,13 +9,68 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 
 class Buy extends React.Component {
-    constructor() {
+    constructor(props) {
         super();
+
+    this.state = {
+        property: "",
+        // saleAddress: "",
+        saleBeds: "",
+        saleBaths: "",
+        saleSqft: "",
+        salePhoto: "",
+        inputValue: ""
     }
 
-    // this.state = {}
+    this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
 
+    }
+
+    handleClick() {
+        console.log("Submitted: ");
+    }
+
+    handleChange(e) {
+        console.log(e.target.value);
+        // this.setState({
+        //     inputValue: e.target.value
+        // })
+
+    }
+
+    componentDidMount() {
+        fetch("https://realtor.p.rapidapi.com/properties/list-for-sale?state_code=NY&limit=10&city=New%20York%20City&offset=0&sort=relevance", {
+	        "method": "GET",
+	        "headers": {
+		    "x-rapidapi-key": "06b0ccfc3dmshd632c1509f6ef19p137354jsn01f64c6e8911",
+		    "x-rapidapi-host": "realtor.p.rapidapi.com"
+	    }
+    })
+    .then(response => response.json())
+    .then(data => {
+        this.setState({
+            salePrice: data.listings[0].price,
+            // saleAddress: 
+            saleBeds: data.listings[0].beds,
+            saleBaths: data.listings[0].baths,
+            saleSqft: data.listings[0].sqft,
+            salePhoto: data.listings[0].photo
+
+        })
+    })
+    .catch(err => {
+        console.error(err);
+    });
+        }
+        
     render() {
+        
+        // const newListings = listings.map(listing => {
+        //     console.log(listing.price)
+        // })
+        // console.log(typeof propertyListings)
+        console.log(this.state.salePrice)
         return (
             <React.Fragment>
                 <Navigation />
@@ -23,8 +78,9 @@ class Buy extends React.Component {
                     <Row className="buy-input-buttons pt-4 fixed-top bg-white">
                         <Col xl={2} lg={4} md={6}>
                             <InputGroup className="px-3">
-                                <Input className="buy-input" />
-                                <InputGroupAddon className="buy-add-on" addonType="append"><Button className="bg-white text-primary"><FontAwesomeIcon icon={faSearch}></FontAwesomeIcon></Button></InputGroupAddon>
+                            {/* name={} value={} */}
+                                <Input  onChange={this.handleChange} className="buy-input" />
+                                <InputGroupAddon onClick={this.handleClick} className="buy-add-on" addonType="append"><Button className="bg-white text-primary"><FontAwesomeIcon icon={faSearch}></FontAwesomeIcon></Button></InputGroupAddon>
                             </InputGroup>
                         </Col>
                         <Col xl={10} lg={8} md={6} className="px-3">
@@ -51,9 +107,10 @@ class Buy extends React.Component {
                             <Row>
                                 <Col>
                                     <h5>Query Real Estate & Homes for Sale</h5>
+                                    {this.state.property}
                                 </Col>
                             </Row>
-
+                            {/* HOUSE DISPLAY AREA */}
                             <Row>
                                 <Col className="result-subsection d-flex justify-content-between">
                                     <div className="number-results">
@@ -69,19 +126,31 @@ class Buy extends React.Component {
                                 <Col className="" lg={12}>
                                     <Row className="bg-danger">
                                         <Col className="bg-success" xl={6} lg={12} sm={6}>
-                                            <PropertyCard />
+                                            <PropertyCard cost={this.state.salePrice}
+                                             beds={this.state.saleBeds}
+                                             baths={this.state.saleBaths}
+                                             sqft={this.state.sqft} />
                                         </Col>
                                         <Col className="bg-info" xl={6} lg={12} sm={6}>
-                                            <PropertyCard />
+                                            <PropertyCard cost={this.state.salePrice}
+                                             beds={this.state.saleBeds}
+                                             baths={this.state.saleBaths}
+                                             sqft={this.state.sqft} />
 
                                         </Col>
                                     </Row>
                                     <Row className="bg-warning">
                                         <Col className="bg-success" xl={6} lg={12} sm={6}>
-                                            <PropertyCard />
+                                            <PropertyCard cost={this.state.salePrice}
+                                             beds={this.state.saleBeds}
+                                             baths={this.state.saleBaths}
+                                             sqft={this.state.sqft} />
                                         </Col>
                                         <Col className="bg-info" xl={6} lg={12} sm={6}>
-                                            <PropertyCard />
+                                            <PropertyCard cost={this.state.salePrice}
+                                             beds={this.state.saleBeds}
+                                             baths={this.state.saleBaths}
+                                             sqft={this.state.sqft} />
                                         </Col>
                                     </Row>
                                 </Col>
