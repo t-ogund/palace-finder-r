@@ -40,10 +40,11 @@ class Buy extends React.Component {
     }
 
     componentDidMount() {
+    const R_API_KEY = process.env.REALTOR_API_KEY
         fetch("https://realtor.p.rapidapi.com/properties/list-for-sale?state_code=NY&limit=10&city=New%20York%20City&offset=0&sort=relevance", {
 	        "method": "GET",
 	        "headers": {
-		    "x-rapidapi-key": "06b0ccfc3dmshd632c1509f6ef19p137354jsn01f64c6e8911",
+		    "x-rapidapi-key": R_API_KEY,
 		    "x-rapidapi-host": "realtor.p.rapidapi.com"
 	    }
     })
