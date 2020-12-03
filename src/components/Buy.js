@@ -19,7 +19,8 @@ class Buy extends React.Component {
         saleBaths: "",
         saleSqft: "",
         salePhoto: "",
-        inputValue: ""
+        inputValue: "",
+        saleQuery: ""
     }
 
     this.handleClick = this.handleClick.bind(this);
@@ -27,24 +28,25 @@ class Buy extends React.Component {
 
     }
 
-    handleClick() {
-        console.log("Submitted: ");
+    handleClick(event) {
+        // console.log("Submitted: ", this.state.inputValue)
+        let saleSearchVal = this.state.inputValue;
+        console.log(saleSearchVal)
     }
 
-    handleChange(e) {
-        console.log(e.target.value);
-        // this.setState({
-        //     inputValue: e.target.value
-        // })
+    handleChange(event) {
+        console.log(event.target.value);
+        this.setState({
+            inputValue: event.target.value
+        })
 
     }
 
     componentDidMount() {
-    const R_API_KEY = process.env.REALTOR_API_KEY
         fetch("https://realtor.p.rapidapi.com/properties/list-for-sale?state_code=NY&limit=10&city=New%20York%20City&offset=0&sort=relevance", {
 	        "method": "GET",
 	        "headers": {
-		    "x-rapidapi-key": R_API_KEY,
+		    "x-rapidapi-key": "06b0ccfc3dmshd632c1509f6ef19p137354jsn01f64c6e8911",
 		    "x-rapidapi-host": "realtor.p.rapidapi.com"
 	    }
     })
