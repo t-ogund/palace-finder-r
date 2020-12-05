@@ -12,19 +12,20 @@ class Buy extends React.Component {
     constructor(props) {
         super();
 
-    this.state = {
-        property: "",
-        // saleAddress: "",
-        saleBeds: "",
-        saleBaths: "",
-        saleSqft: "",
-        salePhoto: "",
-        inputValue: "",
-        saleQuery: ""
-    }
+        this.state = {
+            properties: []
+            // property: "",
+            // saleAddress: "",
+            // saleBeds: "",
+            // saleBaths: "",
+            // saleSqft: "",
+            // salePhoto: "",
+            // inputValue: "",
+            // saleQuery: ""
+        }
 
-    this.handleClick = this.handleClick.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        this.handleChange = this.handleChange.bind(this);
 
     }
 
@@ -43,37 +44,41 @@ class Buy extends React.Component {
     }
 
     componentDidMount() {
-        fetch("https://realtor.p.rapidapi.com/properties/list-for-sale?state_code=NY&limit=10&city=New%20York%20City&offset=0&sort=relevance", {
+        fetch(`https://realtor.p.rapidapi.com/properties/list-for-sale?state_code=NY&limit=10&city=New%20York%20City&offset=0&sort=relevance`, {
 	        "method": "GET",
 	        "headers": {
-		    "x-rapidapi-key": "06b0ccfc3dmshd632c1509f6ef19p137354jsn01f64c6e8911",
+		    // "x-rapidapi-key": "2c3f21e2e1msh8c90eba7ec51cfep1c68bdjsnaa2da559da5f",
 		    "x-rapidapi-host": "realtor.p.rapidapi.com"
 	    }
     })
     .then(response => response.json())
-    .then(data => {
-        this.setState({
-            salePrice: data.listings[0].price,
-            // saleAddress: 
-            saleBeds: data.listings[0].beds,
-            saleBaths: data.listings[0].baths,
-            saleSqft: data.listings[0].sqft,
-            salePhoto: data.listings[0].photo
+    .then(data => { 
+        // const newArray = data.listings.map(arrayItem => {
+        //    return <PropertyCard key={arrayItem.property_Id} cost={arrayItem.price} beds={arrayItem.beds} baths={arrayItem.baths} sqft={arrayItem.sqft} />
+        
+        // })
+        // console.log(newArray)
+       
+            this.setState({
+                properties: data.listings
+                // properties: data.listings
+                // properties
+                // salePrice: data.listings.price,
+                // saleAddress: 
+                // saleBeds: data.listings.beds,
+                // saleBaths: data.listings.baths,
+                // saleSqft: data.listings.sqft,
+                // salePhoto: data.listings.photo
 
-        })
+            })
+console.log(this.state.properties);
     })
     .catch(err => {
         console.error(err);
     });
         }
         
-    render() {
-        
-        // const newListings = listings.map(listing => {
-        //     console.log(listing.price)
-        // })
-        // console.log(typeof propertyListings)
-        console.log(this.state.salePrice)
+    render() { 
         return (
             <React.Fragment>
                 <Navigation />
@@ -110,7 +115,7 @@ class Buy extends React.Component {
                             <Row>
                                 <Col>
                                     <h5>Query Real Estate & Homes for Sale</h5>
-                                    {this.state.property}
+                                    {/* {this.state.property} */}
                                 </Col>
                             </Row>
                             {/* HOUSE DISPLAY AREA */}
@@ -127,7 +132,20 @@ class Buy extends React.Component {
 
                             <Row>
                                 <Col className="" lg={12}>
-                                    <Row className="bg-danger">
+                                {this.state.properties.map(property => {
+                                    return (
+                                        // <Col lg={12}></Col>
+                                        <PropertyCard key={property.property_id}
+                                         cost={property.price} 
+                                         beds={property.beds}
+                                         baths={property.baths}
+                                         sqft={property.sqft} 
+                                         address={property.address}
+                                         photo={property.photo}
+                                          />
+                                    ) 
+                                })}
+                                    {/* <Row className="bg-danger">
                                         <Col className="bg-success" xl={6} lg={12} sm={6}>
                                             <PropertyCard cost={this.state.salePrice}
                                              beds={this.state.saleBeds}
@@ -155,15 +173,9 @@ class Buy extends React.Component {
                                              baths={this.state.saleBaths}
                                              sqft={this.state.sqft} />
                                         </Col>
-                                    </Row>
+                                    </Row> */}
                                 </Col>
                             </Row>
-                            {/* <h3>Hello</h3> */}
-                            {/* <PropertyCard />
-                            <PropertyCard />
-
-                            <PropertyCard /> */}
-
                         </Col>
                     </Row>
                 </Container>
