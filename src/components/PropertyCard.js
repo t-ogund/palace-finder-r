@@ -4,6 +4,7 @@ import {
     CardTitle, CardSubtitle, Row, Col, Button
   } from 'reactstrap';
 import tester from "../assets/tester-house.jpg";
+import comingSoon from "../assets/coming-soon.jpg";
 // import Buy from "./Buy";
 
 class PropertyCard extends React.Component {
@@ -16,7 +17,7 @@ class PropertyCard extends React.Component {
         return (
             <React.Fragment>
                 {/* <Row> */}
-                    {/* <Col> */}
+                    {/* <Col lg={6}> */}
                         <Card className="display-card">
                             <CardImg top max-width="12rem" src={this.props.photo} alt="Test Image" />
                             <CardBody className="p-2 card-body">
@@ -45,7 +46,7 @@ class PropertyCard extends React.Component {
                             </CardBody>
                         </Card>
                     {/* </Col> */}
-                {/* </Row> */}
+                {/* // </Row> */}
             </React.Fragment>
         )
     }

@@ -6,6 +6,8 @@ import PropertyCard from "./PropertyCard";
 import Map from "./Map";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import comingSoon from "../assets/coming-soon.jpg";
+
 
 
 class Buy extends React.Component {
@@ -44,10 +46,10 @@ class Buy extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`https://realtor.p.rapidapi.com/properties/list-for-sale?state_code=NY&limit=10&city=New%20York%20City&offset=0&sort=relevance`, {
+        fetch(`https://realtor.p.rapidapi.com/properties/list-for-sale?state_code=NY&limit=11&city=New%20York%20City&offset=0&sort=relevance`, {
 	        "method": "GET",
 	        "headers": {
-		    // "x-rapidapi-key": "2c3f21e2e1msh8c90eba7ec51cfep1c68bdjsnaa2da559da5f",
+		    "x-rapidapi-key": "2c3f21e2e1msh8c90eba7ec51cfep1c68bdjsnaa2da559da5f",
 		    "x-rapidapi-host": "realtor.p.rapidapi.com"
 	    }
     })
@@ -79,6 +81,14 @@ console.log(this.state.properties);
         }
         
     render() { 
+
+        const array = this.state.properties;
+        const rows = array.reduce(function(rows, key, index) {
+            return (index % 2 == 0 ? rows.push([key]) : rows[rows.length-1].push(key)) && rows
+        }, []);
+
+        console.log(rows)
+        // console.log(this.state.properties[4].photo_count)
         return (
             <React.Fragment>
                 <Navigation />
@@ -132,19 +142,25 @@ console.log(this.state.properties);
 
                             <Row>
                                 <Col className="" lg={12}>
-                                {this.state.properties.map(property => {
-                                    return (
-                                        // <Col lg={12}></Col>
-                                        <PropertyCard key={property.property_id}
-                                         cost={property.price} 
-                                         beds={property.beds}
-                                         baths={property.baths}
-                                         sqft={property.sqft} 
-                                         address={property.address}
-                                         photo={property.photo}
-                                          />
-                                    ) 
-                                })}
+                                {rows.map(row => (
+                                    
+                                    <Row>
+                                        { row.map(col => (
+                                        <Col xl={6} lg={12} md={6}>
+                                            {<PropertyCard 
+                                            key={col.property_id}
+                                            cost={col.price} 
+                                            beds={col.beds}
+                                            baths={col.baths}
+                                            sqft={col.sqft}
+                                            address={col.address}
+                                            photo={col.photo_count === 0 ? comingSoon : col.photo}
+                                            />}
+                                        </Col>
+                                        ))}
+                                    </Row>
+                                    
+                                ))}
                                     {/* <Row className="bg-danger">
                                         <Col className="bg-success" xl={6} lg={12} sm={6}>
                                             <PropertyCard cost={this.state.salePrice}
