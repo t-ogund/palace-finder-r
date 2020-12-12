@@ -49,7 +49,7 @@ class Buy extends React.Component {
         fetch(`https://realtor.p.rapidapi.com/properties/list-for-sale?state_code=NY&limit=11&city=New%20York%20City&offset=0&sort=relevance`, {
 	        "method": "GET",
 	        "headers": {
-		    "x-rapidapi-key": "2c3f21e2e1msh8c90eba7ec51cfep1c68bdjsnaa2da559da5f",
+		    // "x-rapidapi-key": "2c3f21e2e1msh8c90eba7ec51cfep1c68bdjsnaa2da559da5f",
 		    "x-rapidapi-host": "realtor.p.rapidapi.com"
 	    }
     })
