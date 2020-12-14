@@ -14,7 +14,7 @@ class AutoComplete extends React.Component {
     render() {
         return(
             // <ListGroup>
-                <ListGroupItem tag="a" href="#" action>Testing</ListGroupItem>
+                <ListGroupItem tag="a" href="#" action>testing</ListGroupItem>
             // </ListGroup>
         )
     }
