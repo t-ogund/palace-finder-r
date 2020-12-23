@@ -108,7 +108,9 @@ class Splash extends React.Component {
         // }
 
     render() {
-        let suggestions = this.state.results.map(suggestion => <AutoComplete></AutoComplete>)
+        let suggestions = this.state.results.map(suggestion => <AutoComplete city={suggestion.city}
+        state_code={suggestion.state_code}
+        ></AutoComplete>)
         // console.log("Autocomplete suggestions: ", suggestions)
 
     return (
@@ -125,7 +127,6 @@ class Splash extends React.Component {
                         </InputGroup>
                         <ListGroup>
                             {suggestions}
-
                         </ListGroup>
                     </Col>
                 </Row>
