@@ -23,7 +23,7 @@ import { faChessRook } from '@fortawesome/free-solid-svg-icons'
                             </NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink>
+                            <NavLink tag={Link} to="/rent">
                                 Rent
                             </NavLink>
                         </NavItem>

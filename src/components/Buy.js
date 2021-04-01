@@ -7,6 +7,7 @@ import Map from "./Map";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import comingSoon from "../assets/coming-soon.jpg";
+import AutoComplete from "./AutoComplete";
 
 
 
@@ -46,10 +47,10 @@ class Buy extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`https://realtor.p.rapidapi.com/properties/list-for-sale?state_code=NY&limit=11&city=New%20York%20City&offset=0&sort=relevance`, {
+        fetch(`https://realtor.p.rapidapi.com/properties/list-for-sale?state_code=${this.props.state}&limit=11&city=${this.props.city}&offset=0&sort=relevance`, {
 	        "method": "GET",
 	        "headers": {
-		    "x-rapidapi-key": "36968511dcmshb21aa4c530352c5p19974ejsn4f0841f94c6e",
+		    "x-rapidapi-key": "f01a0fcc14msh7778b402f6433d7p1eaeb7jsnd38c6ea1da3d",
 		    "x-rapidapi-host": "realtor.p.rapidapi.com"
 	    }
     })
@@ -74,6 +75,11 @@ class Buy extends React.Component {
 
             })
 console.log(this.state.properties);
+console.log("AutoComplete: ", <AutoComplete cost={AutoComplete.prototype.handleSuggestion}
+city={this.props.city} state={this.props.state_code} />)
+console.log("City: ", this.props)
+console.log("State: ", this.props)
+console.log("State Code: ", this.props)
     })
     .catch(err => {
         console.error(err);
@@ -91,7 +97,7 @@ console.log(this.state.properties);
         // console.log(this.state.properties[4].photo_count)
         return (
             <React.Fragment>
-                <Navigation />
+                {/* <Navigation /> */}
                 <Container fluid>
                     <Row className="buy-input-buttons pt-4 fixed-top bg-white">
                         <Col xl={2} lg={4} md={6}>
@@ -125,7 +131,7 @@ console.log(this.state.properties);
                             <Row>
                                 <Col>
                                     <h5>Query Real Estate & Homes for Sale</h5>
-                                    {/* {this.state.property} */}
+                                    {this.state.property}
                                 </Col>
                             </Row>
                             {/* HOUSE DISPLAY AREA */}
