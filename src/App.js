@@ -9,7 +9,7 @@ import HomeBottom from "./components/HomeBottom";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 
 function App(props) {
-  console.log(props)
+  console.log("APP PROPS: ", props)
   return (
     <React.Fragment>
       <Navigation />

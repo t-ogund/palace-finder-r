@@ -19,7 +19,7 @@ class Splash extends React.Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
-        console.log(props)
+        console.log("PROOOOOOOOPS: ", props)
     }
 
     
@@ -69,7 +69,28 @@ handleChange(e) {
 
 
 handleClick(e) {
-    console.log(e.target.textContent);
+    // console.log(e.target.textContent);
+    console.log(e.target.textContent)
+    const parsedCityState = e.target.textContent.split(" ")
+    console.log(parsedCityState)
+    const city = parsedCityState[0];
+    const state = parsedCityState[1]
+    console.log("CITY: ", city, "STATE: ", state)
+    
+
+//     fetch(`https://realtor-com-real-estate.p.rapidapi.com/for-sale?city=Detroit&state_code=MI&offset=0&limit=42`, {
+// 	"method": "GET",
+// 	"headers": {
+// 		"x-rapidapi-key": "b83c4c021amsh3983c7298d63292p1155a9jsnaa9b026a3b17",
+// 		"x-rapidapi-host": "realtor-com-real-estate.p.rapidapi.com"
+// 	}
+// })
+// .then(response => response.json())
+// .then(body => console.log(body))
+// .catch(err => {
+// 	console.error(err);
+// });
+
 }
 
 autoSuggest(query) {
@@ -100,7 +121,7 @@ autoSuggest(query) {
                         <ListGroup>
                             {
                                 results.map((result) => {
-                                    return <ListGroupItem className="suggestion-result" onClick={this.handleClick}>{result.city}</ListGroupItem>
+                                    return <ListGroupItem key={result.geo_id} className="suggestion-result" onClick={this.handleClick}>{result.city}, {result.state_code}</ListGroupItem>
                                 })
                             }
                         </ListGroup>
