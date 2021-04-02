@@ -16,85 +16,17 @@ class Buy extends React.Component {
         super();
 
         this.state = {
-            properties: []
-            // property: "",
-            // saleAddress: "",
-            // saleBeds: "",
-            // saleBaths: "",
-            // saleSqft: "",
-            // salePhoto: "",
-            // inputValue: "",
-            // saleQuery: ""
+     
         }
-
-        this.handleClick = this.handleClick.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-
     }
-
-    handleClick(event) {
-        // console.log("Submitted: ", this.state.inputValue)
-        let saleSearchVal = this.state.inputValue;
-        console.log(saleSearchVal)
-    }
-
-    handleChange(event) {
-        console.log(event.target.value);
-        this.setState({
-            inputValue: event.target.value
-        })
-
-    }
-
-    componentDidMount() {
-        fetch(`https://realtor.p.rapidapi.com/properties/list-for-sale?state_code=${this.props.state}&limit=11&city=${this.props.city}&offset=0&sort=relevance`, {
-	        "method": "GET",
-	        "headers": {
-		    "x-rapidapi-key": "f01a0fcc14msh7778b402f6433d7p1eaeb7jsnd38c6ea1da3d",
-		    "x-rapidapi-host": "realtor.p.rapidapi.com"
-	    }
-    })
-    .then(response => response.json())
-    .then(data => { 
-        // const newArray = data.listings.map(arrayItem => {
-        //    return <PropertyCard key={arrayItem.property_Id} cost={arrayItem.price} beds={arrayItem.beds} baths={arrayItem.baths} sqft={arrayItem.sqft} />
-        
-        // })
-        // console.log(newArray)
-       
-            this.setState({
-                properties: data.listings
-                // properties: data.listings
-                // properties
-                // salePrice: data.listings.price,
-                // saleAddress: 
-                // saleBeds: data.listings.beds,
-                // saleBaths: data.listings.baths,
-                // saleSqft: data.listings.sqft,
-                // salePhoto: data.listings.photo
-
-            })
-console.log(this.state.properties);
-console.log("AutoComplete: ", <AutoComplete cost={AutoComplete.prototype.handleSuggestion}
-city={this.props.city} state={this.props.state_code} />)
-console.log("City: ", this.props)
-console.log("State: ", this.props)
-console.log("State Code: ", this.props)
-    })
-    .catch(err => {
-        console.error(err);
-    });
-        }
         
     render() { 
 
-        const array = this.state.properties;
-        const rows = array.reduce(function(rows, key, index) {
-            return (index % 2 == 0 ? rows.push([key]) : rows[rows.length-1].push(key)) && rows
-        }, []);
+        // const array = this.state.properties;
+        // const rows = array.reduce(function(rows, key, index) {
+        //     return (index % 2 == 0 ? rows.push([key]) : rows[rows.length-1].push(key)) && rows
+        // }, []);
 
-        console.log(rows)
-        // console.log(this.state.properties[4].photo_count)
         return (
             <React.Fragment>
                 {/* <Navigation /> */}
@@ -103,8 +35,8 @@ console.log("State Code: ", this.props)
                         <Col xl={2} lg={4} md={6}>
                             <InputGroup className="px-3">
                             {/* name={} value={} */}
-                                <Input  onChange={this.handleChange} className="buy-input" />
-                                <InputGroupAddon onClick={this.handleClick} className="buy-add-on" addonType="append"><Button className="bg-white text-primary"><FontAwesomeIcon icon={faSearch}></FontAwesomeIcon></Button></InputGroupAddon>
+                                <Input className="buy-input" />
+                                <InputGroupAddon className="buy-add-on" addonType="append"><Button className="bg-white text-primary"><FontAwesomeIcon icon={faSearch}></FontAwesomeIcon></Button></InputGroupAddon>
                             </InputGroup>
                         </Col>
                         <Col xl={10} lg={8} md={6} className="px-3">
@@ -131,11 +63,11 @@ console.log("State Code: ", this.props)
                             <Row>
                                 <Col>
                                     <h5>Query Real Estate & Homes for Sale</h5>
-                                    {this.state.property}
+                                    
                                 </Col>
                             </Row>
                             {/* HOUSE DISPLAY AREA */}
-                            <Row>
+                            {/* <Row>
                                 <Col className="result-subsection d-flex justify-content-between">
                                     <div className="number-results">
                                         <p>Number results </p>
@@ -144,9 +76,9 @@ console.log("State Code: ", this.props)
                                         <p>Sort By: Dropdown goes here</p>
                                     </div>
                                 </Col>
-                            </Row>
+                            </Row> */}
 
-                            <Row>
+                            {/* <Row>
                                 <Col className="" lg={12}>
                                 {rows.map(row => (
                                     
@@ -167,7 +99,11 @@ console.log("State Code: ", this.props)
                                     </Row>
                                     
                                 ))}
-                                    {/* <Row className="bg-danger">
+                                    
+                                </Col>
+                            </Row> */}
+
+                            <Row className="bg-danger">
                                         <Col className="bg-success" xl={6} lg={12} sm={6}>
                                             <PropertyCard cost={this.state.salePrice}
                                              beds={this.state.saleBeds}
@@ -195,9 +131,8 @@ console.log("State Code: ", this.props)
                                              baths={this.state.saleBaths}
                                              sqft={this.state.sqft} />
                                         </Col>
-                                    </Row> */}
-                                </Col>
-                            </Row>
+                                    </Row>
+
                         </Col>
                     </Row>
                 </Container>

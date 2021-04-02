@@ -10,130 +10,61 @@ class Splash extends React.Component {
         super(props);
 
         this.state = {
-            input: "",
-            results: [],
-            isLoading: false
+           greeting: ""
         }
-
-        this.handleChange = this.handleChange.bind(this);
-        // this.handleClick = this.handleClick.bind(this);
-        this.handleSuggestion = this.handleSuggestion.bind(this);
+        this.handleKeyUp = this.handleKeyUp.bind(this);
     }
 
-    // componentDidMount() {
-    //     fetch(`https://realtor.p.rapidapi.com/locations/auto-complete?input=${this.state.input}`, {
-	//         "method": "GET",
-	//         "headers": {
-	// 	        "x-rapidapi-key": "36968511dcmshb21aa4c530352c5p19974ejsn4f0841f94c6e",
-	// 	        "x-rapidapi-host": "realtor.p.rapidapi.com"
-	//         }
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         this.setState({
-    //             // input: event.target.value,
-    //             results: data.autocomplete
-    //         })
-            
-    //         // console.log("Event: ", event)
-    //         console.log("input: ", this.state.input)
-    //     console.log(data)
-
-    //     })
-    //     .catch(err => {
-    //         console.error(err);
-    //     });
-    // }
     
-    handleChange(event) {
-        this.setState({ input: event.target.value })
-        fetch(`https://realtor.p.rapidapi.com/locations/auto-complete?input=${this.state.input}`, {
-	        "method": "GET",
-	        "headers": {
-		        "x-rapidapi-key": "f01a0fcc14msh7778b402f6433d7p1eaeb7jsnd38c6ea1da3d",
-		        "x-rapidapi-host": "realtor.p.rapidapi.com"
-	        }
-        })
-        .then(response => response.json())
-        .then(data => {
-            this.setState({
-                // input: event.target.value,
-                results: data.autocomplete,
-                isLoading: true
-            })
-            
-            console.log("Event: ", event)
-            console.log("input: ", this.state.input)
-        console.log(data)
 
-        })
-        .catch(err => {
-            console.error(err);
-        });
-
-    }
-
-    handleSuggestion(event) {
-        event.preventDefault();
-        console.log("hi")
-    }
-
-//     handleClick(event) {
-//         fetch(`https://realtor.p.rapidapi.com/locations/auto-complete?input=New&20York`, {
+//     componentDidMount() {
+//         fetch("https://realtor-com-real-estate.p.rapidapi.com/location/suggest?input=New", {
 // 	"method": "GET",
 // 	"headers": {
-// 		"x-rapidapi-key": "36968511dcmshb21aa4c530352c5p19974ejsn4f0841f94c6e",
-// 		"x-rapidapi-host": "realtor.p.rapidapi.com"
+// 		"x-rapidapi-key": "b83c4c021amsh3983c7298d63292p1155a9jsnaa9b026a3b17",
+// 		"x-rapidapi-host": "realtor-com-real-estate.p.rapidapi.com"
 // 	}
 // })
 // .then(response => response.json())
-// .then(data => {
-//     this.setState({
-//         input: event.target.value,
-//         results: data.autocomplete
-//     })
-//     console.log("Event: ", event);
-//     console.log("Query: ", this.state.input);
-//     console.log("Results: ", this.state.results);
-// })
+// .then(data => console.log(data))
 // .catch(err => {
 // 	console.error(err);
 // });
-    //     fetch(`https://realtor.p.rapidapi.com/properties/list-for-sale?city=${this.state.input}&offset=0&limit=10&state_code=NY&sort=relevance`, {
-	//     "method": "GET",
-	//     "headers": {
-	// 	"x-rapidapi-key": "2c3f21e2e1msh8c90eba7ec51cfep1c68bdjsnaa2da559da5f",
-	// 	"x-rapidapi-host": "realtor.p.rapidapi.com"
-	//     }
-    // })
-    // .then(response => response.json())
-    // .then(data => console.log(data))
-    // .catch(err => {
-    //     console.error(err);
-    // });
-        // }
+//     }
+
+handleKeyUp(e) {
+    const value = e.target;
+    this.setState({
+        [greeting]: value
+    })
+    console.log(this.state.greeting)
+}
+
+
+handleClick(e) {
+    console.log("Clicked")
+}
+
+autoSuggest(query) {
+    
+}
 
     render() {
-        let suggestions = this.state.results.map(suggestion => <AutoComplete city={suggestion.city}
-        state_code={suggestion.state_code}
-        ></AutoComplete>)
-        
-        // console.log("Autocomplete suggestions: ", suggestions)
 
     return (
         <React.Fragment>
             <Container fluid className="splash">
                 <Row className="d-flex justify-content-center align-items-center h-100">
                     <Col className="col-md-4">
-                        <h2>{this.state.input}</h2>
+                        <h2>Placeholder</h2>
                         <InputGroup className="">
-                            <Input onChange={this.handleChange} className="splash-input" />
+                            <Input onKeyUp={this.handleKeyUp} className="splash-input" name={greeting} value={this.state.greeting} />
                             <InputGroupAddon addonType="append">
                                 <Button onClick={this.handleClick}>Search</Button>
                             </InputGroupAddon>
                         </InputGroup>
                         <ListGroup>
-                            {suggestions.slice(0, 5)}
+                            
                         </ListGroup>
                     </Col>
                 </Row>
