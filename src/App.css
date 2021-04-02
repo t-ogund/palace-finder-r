@@ -48,6 +48,10 @@
   height: 200px;
 }
 
+.suggestion-result:hover {
+  cursor: pointer;
+}
+
 .home-bottom-header {
   text-align: center;
 }

@@ -1,6 +1,14 @@
 import React from "react";
 
 class Rent extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            
+        }
+        console.log("RENT PROPS: ", props)
+    }
     render() {
         const style = {
             color: "red",

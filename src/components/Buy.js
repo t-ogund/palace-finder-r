@@ -18,6 +18,7 @@ class Buy extends React.Component {
         this.state = {
      
         }
+        console.log("BUY PROPS: ", props)
     }
         
     render() { 

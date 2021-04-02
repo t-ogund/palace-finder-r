@@ -4,10 +4,11 @@ import Splash from "./Splash";
 import HomeBottom from "./HomeBottom";
 
 class Home extends React.Component {
-    constructor() {
+    constructor(props) {
         super();
 
         // this.state = {};
+        console.log(props)
     }
 
     render() {
