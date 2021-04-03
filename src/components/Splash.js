@@ -15,7 +15,8 @@ class Splash extends React.Component {
 
         this.state = {
            query: "",
-           suggestionResults: []
+           suggestionResults: [],
+           buyData: []
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
@@ -73,23 +74,28 @@ handleClick(e) {
     console.log(e.target.textContent)
     const parsedCityState = e.target.textContent.split(" ")
     console.log(parsedCityState)
-    const city = parsedCityState[0];
+    const city = parsedCityState[0].slice(0, -1);
     const state = parsedCityState[1]
     console.log("CITY: ", city, "STATE: ", state)
     
 
-//     fetch(`https://realtor-com-real-estate.p.rapidapi.com/for-sale?city=Detroit&state_code=MI&offset=0&limit=42`, {
-// 	"method": "GET",
-// 	"headers": {
-// 		"x-rapidapi-key": "b83c4c021amsh3983c7298d63292p1155a9jsnaa9b026a3b17",
-// 		"x-rapidapi-host": "realtor-com-real-estate.p.rapidapi.com"
-// 	}
-// })
-// .then(response => response.json())
-// .then(body => console.log(body))
-// .catch(err => {
-// 	console.error(err);
-// });
+    fetch(`https://realtor-com-real-estate.p.rapidapi.com/for-sale?city=${city}&state_code=${state}&offset=0&limit=10`, {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": "b83c4c021amsh3983c7298d63292p1155a9jsnaa9b026a3b17",
+		"x-rapidapi-host": "realtor-com-real-estate.p.rapidapi.com"
+	}
+})
+.then(response => response.json())
+.then(body => {
+    this.setState({
+        buyData: body
+    })
+    console.log("THIS.STATE.BUYDATA: ", this.state.buyData)
+})
+.catch(err => {
+	console.error(err);
+});
 
 }
 
@@ -108,7 +114,7 @@ autoSuggest(query) {
             <Route path="/rent" render={({ match }) => (
           <Rent query={this.state.query} match={match} />
         )} ></Route>
-            <Container fluid className="splash">
+            {this.state.buyData.length === 0? <Container fluid className="splash">
                 <Row className="d-flex justify-content-center align-items-center h-100">
                     <Col className="col-md-4">
                         <h2>{this.state.query}</h2>
@@ -127,7 +133,9 @@ autoSuggest(query) {
                         </ListGroup>
                     </Col>
                 </Row>
-            </Container>
+            <HomeBottom />
+
+            </Container> : <Buy buyData={this.state.buyData} />}
             </Switch>
         </React.Fragment>
     )

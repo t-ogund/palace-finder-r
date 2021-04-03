@@ -16,17 +16,19 @@ class Buy extends React.Component {
         super();
 
         this.state = {
-     
+        
         }
         console.log("BUY PROPS: ", props)
     }
         
     render() { 
 
-        // const array = this.state.properties;
-        // const rows = array.reduce(function(rows, key, index) {
-        //     return (index % 2 == 0 ? rows.push([key]) : rows[rows.length-1].push(key)) && rows
-        // }, []);
+        const array = this.props.buyData.data.results;
+        console.log("ARRAYPROPS: ", array)
+       
+        const rows = array.reduce(function(rows, key, index) {
+            return (index % 2 == 0 ? rows.push([key]) : rows[rows.length-1].push(key)) && rows
+        }, []);
 
         return (
             <React.Fragment>
@@ -68,7 +70,7 @@ class Buy extends React.Component {
                                 </Col>
                             </Row>
                             {/* HOUSE DISPLAY AREA */}
-                            {/* <Row>
+                            <Row>
                                 <Col className="result-subsection d-flex justify-content-between">
                                     <div className="number-results">
                                         <p>Number results </p>
@@ -77,9 +79,9 @@ class Buy extends React.Component {
                                         <p>Sort By: Dropdown goes here</p>
                                     </div>
                                 </Col>
-                            </Row> */}
+                            </Row>
 
-                            {/* <Row>
+                            <Row>
                                 <Col className="" lg={12}>
                                 {rows.map(row => (
                                     
@@ -88,12 +90,12 @@ class Buy extends React.Component {
                                         <Col xl={6} lg={12} md={6}>
                                             {<PropertyCard 
                                             key={col.property_id}
-                                            cost={col.price} 
-                                            beds={col.beds}
-                                            baths={col.baths}
-                                            sqft={col.sqft}
-                                            address={col.address}
-                                            photo={col.photo_count === 0 ? comingSoon : col.photo}
+                                            cost={col.list_price} 
+                                            beds={col.description.beds}
+                                            baths={col.description.baths}
+                                            sqft={col.description.sqft}
+                                            address={col.permalink}
+                                            photo={col.photo_count === 0 ? comingSoon : col.primary_photo.href}
                                             />}
                                         </Col>
                                         ))}
@@ -102,9 +104,9 @@ class Buy extends React.Component {
                                 ))}
                                     
                                 </Col>
-                            </Row> */}
+                            </Row>
 
-                            <Row className="bg-danger">
+                            {/* <Row className="bg-danger">
                                         <Col className="bg-success" xl={6} lg={12} sm={6}>
                                             <PropertyCard cost={this.state.salePrice}
                                              beds={this.state.saleBeds}
@@ -132,7 +134,7 @@ class Buy extends React.Component {
                                              baths={this.state.saleBaths}
                                              sqft={this.state.sqft} />
                                         </Col>
-                                    </Row>
+                                    </Row> */}
 
                         </Col>
                     </Row>
