@@ -16,7 +16,9 @@ class Splash extends React.Component {
         this.state = {
            query: "",
            suggestionResults: [],
-           buyData: []
+           buyData: [],
+           selectedCity: null,
+           selectedState: null
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
@@ -89,7 +91,9 @@ handleClick(e) {
 .then(response => response.json())
 .then(body => {
     this.setState({
-        buyData: body
+        buyData: body,
+        selectedCity: city,
+        selectedState: state
     })
     console.log("THIS.STATE.BUYDATA: ", this.state.buyData)
 })
@@ -114,7 +118,9 @@ autoSuggest(query) {
             <Route path="/rent" render={({ match }) => (
           <Rent query={this.state.query} match={match} />
         )} ></Route>
-            {this.state.buyData.length === 0? <Container fluid className="splash">
+
+
+            {this.state.buyData.length === 0 ? <Container fluid className="splash">
                 <Row className="d-flex justify-content-center align-items-center h-100">
                     <Col className="col-md-4">
                         <h2>{this.state.query}</h2>
@@ -135,7 +141,9 @@ autoSuggest(query) {
                 </Row>
             <HomeBottom />
 
-            </Container> : <Buy buyData={this.state.buyData} />}
+            </Container> : <Buy buyData={this.state.buyData} query={this.state.query} city={this.state.selectedCity} state={this.state.selectedState} />}
+
+
             </Switch>
         </React.Fragment>
     )

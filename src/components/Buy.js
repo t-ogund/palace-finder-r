@@ -16,19 +16,27 @@ class Buy extends React.Component {
         super();
 
         this.state = {
-        
+            selectedBuyData: props
         }
         console.log("BUY PROPS: ", props)
+        console.log("THIS.STATE.SELECTEDBUYDATA: ", this.state.selectedBuyData)
     }
         
     render() { 
 
-        const array = this.props.buyData.data.results;
-        console.log("ARRAYPROPS: ", array)
-       
-        const rows = array.reduce(function(rows, key, index) {
-            return (index % 2 == 0 ? rows.push([key]) : rows[rows.length-1].push(key)) && rows
-        }, []);
+        // const array = this.state.selectedBuyData.buyData.data.results;
+        // console.log("ARRAYPROPS: ", array)
+
+        let array;
+        // if (this.state.selectedBuyData.query === "") {
+        //     array = null
+        // } else {
+        //     array = this.state.selectedBuyData.buyData.data.results;
+        // } 
+        // const rows = array.reduce(function(rows, key, index) {
+        //     return (index % 2 == 0 ? rows.push([key]) : rows[rows.length-1].push(key)) && rows
+        // }, []);
+        console.log("TESTING RENDER: ", this.state.selectedBuyData)
 
         return (
             <React.Fragment>
@@ -83,7 +91,7 @@ class Buy extends React.Component {
 
                             <Row>
                                 <Col className="" lg={12}>
-                                {rows.map(row => (
+                                {/* {rows.map(row => (
                                     
                                     <Row>
                                         { row.map(col => (
@@ -95,13 +103,13 @@ class Buy extends React.Component {
                                             baths={col.description.baths}
                                             sqft={col.description.sqft}
                                             address={col.permalink}
-                                            photo={col.photo_count === 0 ? comingSoon : col.primary_photo.href}
+                                            photo={col.photo_count === 0 ? comingSoon : col.photos[0].href}
                                             />}
                                         </Col>
                                         ))}
                                     </Row>
                                     
-                                ))}
+                                ))} */}
                                     
                                 </Col>
                             </Row>
