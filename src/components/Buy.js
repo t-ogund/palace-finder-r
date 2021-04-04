@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import comingSoon from "../assets/coming-soon.jpg";
 import AutoComplete from "./AutoComplete";
+import { BrowserRouter, Route, Switch, Link, withRouter } from "react-router-dom";
 
 
 
@@ -20,22 +21,27 @@ class Buy extends React.Component {
         }
         console.log("BUY PROPS: ", props)
         console.log("THIS.STATE.SELECTEDBUYDATA: ", this.state.selectedBuyData)
+        // let searchValue
+        // searchValue = `${this.state.selectedBuyData.city}, ${this.state.selectedBuyData.state}`
+        // // let searchValue = props.match.params.searchValue
+        // console.log(searchValue)
+        let searchValue = props.match
+        console.log(searchValue)
     }
         
     render() { 
-
         // const array = this.state.selectedBuyData.buyData.data.results;
         // console.log("ARRAYPROPS: ", array)
 
         let array;
-        // if (this.state.selectedBuyData.query === "") {
-        //     array = null
-        // } else {
-        //     array = this.state.selectedBuyData.buyData.data.results;
-        // } 
-        // const rows = array.reduce(function(rows, key, index) {
-        //     return (index % 2 == 0 ? rows.push([key]) : rows[rows.length-1].push(key)) && rows
-        // }, []);
+        if (this.state.selectedBuyData.query === "") {
+            array = null
+        } else {
+            array = this.state.selectedBuyData.buyData.data.results;
+        } 
+        const rows = array.reduce(function(rows, key, index) {
+            return (index % 2 == 0 ? rows.push([key]) : rows[rows.length-1].push(key)) && rows
+        }, []);
         console.log("TESTING RENDER: ", this.state.selectedBuyData)
 
         return (
@@ -73,7 +79,7 @@ class Buy extends React.Component {
                         <Col className="buy-display py-2" id="house-area" sm={{ size: 12, offset: 0}} md={{ size: 12, offset: 0}} lg={{ size: 4, offset: 8}} xl={{ size: 6, offset: 6}}>
                             <Row>
                                 <Col>
-                                    <h5>Query Real Estate & Homes for Sale</h5>
+                                    <h5>{this.state.selectedBuyData.city + ", " + this.state.selectedBuyData.state} Real Estate & Homes for Sale</h5>
                                     
                                 </Col>
                             </Row>
@@ -91,7 +97,7 @@ class Buy extends React.Component {
 
                             <Row>
                                 <Col className="" lg={12}>
-                                {/* {rows.map(row => (
+                                {rows.map(row => (
                                     
                                     <Row>
                                         { row.map(col => (
@@ -109,7 +115,7 @@ class Buy extends React.Component {
                                         ))}
                                     </Row>
                                     
-                                ))} */}
+                                ))}
                                     
                                 </Col>
                             </Row>
@@ -153,4 +159,4 @@ class Buy extends React.Component {
     }
 }
 
-export default Buy
+export default withRouter(Buy);

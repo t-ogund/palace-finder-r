@@ -7,7 +7,7 @@ import AutoComplete from "./AutoComplete";
 import Buy from "./Buy";
 import Rent from "./Rent";
 import HomeBottom from "./HomeBottom";
-import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Link, withRouter } from "react-router-dom";
 
 class Splash extends React.Component {
     constructor(props) {
@@ -18,11 +18,11 @@ class Splash extends React.Component {
            suggestionResults: [],
            buyData: [],
            selectedCity: null,
-           selectedState: null
+           selectedState: null,
+           selectedObject: null
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
-        console.log("PROOOOOOOOPS: ", props)
     }
 
     
@@ -43,7 +43,6 @@ class Splash extends React.Component {
 //     }
 
 handleChange(e) {
-    console.log("E.TARGET.VALUE: ", e.target.value);
     this.setState({
         query: e.target.value
     })
@@ -73,12 +72,18 @@ handleChange(e) {
 
 handleClick(e) {
     // console.log(e.target.textContent);
-    console.log(e.target.textContent)
+    // console.log(e.target.textContent)
     const parsedCityState = e.target.textContent.split(" ")
-    console.log(parsedCityState)
+    // console.log(parsedCityState)
     const city = parsedCityState[0].slice(0, -1);
     const state = parsedCityState[1]
-    console.log("CITY: ", city, "STATE: ", state)
+    let refCityState = `${city}, ${state}`;
+    
+    // console.log("CITY: ", city, "STATE: ", state);
+
+
+
+    
     
 
     fetch(`https://realtor-com-real-estate.p.rapidapi.com/for-sale?city=${city}&state_code=${state}&offset=0&limit=10`, {
@@ -93,13 +98,21 @@ handleClick(e) {
     this.setState({
         buyData: body,
         selectedCity: city,
-        selectedState: state
+        selectedState: state,
+        selectedObject: e.target.textContent
     })
     console.log("THIS.STATE.BUYDATA: ", this.state.buyData)
 })
 .catch(err => {
 	console.error(err);
 });
+
+//TEST! MAY REMOVE!
+// let searchValue = this.state.selectedObject;
+// let path = `/buy/${searchValue}`;
+// this.props.history.push(path);
+// this.props.onSearch(this.state.searchValue);
+// e.currentTarget.reset();
 
 }
 
@@ -113,11 +126,11 @@ autoSuggest(query) {
         <React.Fragment>
             <Switch>
             <Route path="/buy" render={({ match }) => (
-          <Buy query={this.state.query} match={match} />
-        )} ></Route>
+                <Buy query={this.state.query} match={match} /> )} >
+            </Route>
             <Route path="/rent" render={({ match }) => (
-          <Rent query={this.state.query} match={match} />
-        )} ></Route>
+                <Rent query={this.state.query} match={match} /> )} >
+            </Route>
 
 
             {this.state.buyData.length === 0 ? <Container fluid className="splash">
@@ -125,7 +138,7 @@ autoSuggest(query) {
                     <Col className="col-md-4">
                         <h2>{this.state.query}</h2>
                         <InputGroup className="">
-                            <Input onChange={this.handleChange} type="text" className="splash-input" />
+                            <Input ref={ (input) => this.refCityState = input } onChange={this.handleChange} type="text" className="splash-input" />
                             <InputGroupAddon addonType="append">
                                 <Button onClick={this.handleClick}>Search</Button>
                             </InputGroupAddon>
@@ -141,7 +154,7 @@ autoSuggest(query) {
                 </Row>
             <HomeBottom />
 
-            </Container> : <Buy buyData={this.state.buyData} query={this.state.query} city={this.state.selectedCity} state={this.state.selectedState} />}
+            </Container> : <Buy buyData={this.state.buyData} query={this.state.query} city={this.state.selectedCity} state={this.state.selectedState}  />}
 
 
             </Switch>
@@ -151,4 +164,4 @@ autoSuggest(query) {
 }
 
 
-export default Splash;
+export default withRouter(Splash);
