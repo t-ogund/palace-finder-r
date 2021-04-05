@@ -7,6 +7,7 @@ import AutoComplete from "./AutoComplete";
 import Buy from "./Buy";
 import Rent from "./Rent";
 import HomeBottom from "./HomeBottom";
+import SearchResults from "./SearchResults";
 import { BrowserRouter, Route, Switch, Link, withRouter } from "react-router-dom";
 
 class Splash extends React.Component {
@@ -125,12 +126,21 @@ autoSuggest(query) {
     return (
         <React.Fragment>
             <Switch>
-            <Route path="/buy" render={({ match }) => (
+            {/* <Route path="/buy" render={({ match }) => (
                 <Buy query={this.state.query} match={match} /> )} >
             </Route>
             <Route path="/rent" render={({ match }) => (
                 <Rent query={this.state.query} match={match} /> )} >
+            </Route> */}
+            <Route path="/buy" render={({ match }) => (
+                <SearchResults query={this.state.query} match={match} /> )} >
             </Route>
+            <Route path="/rent" render={({ match }) => (
+                <SearchResults query={this.state.query} match={match} /> )} >
+            </Route>
+            {/* <Route path="/searchResults" render={({ match }) => (
+                <SearchResults query={this.state.query} match={match} /> )} >
+            </Route> */}
 
 
             {this.state.buyData.length === 0 ? <Container fluid className="splash">

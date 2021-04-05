@@ -28,8 +28,8 @@ import { faChessRook } from '@fortawesome/free-solid-svg-icons'
                             </NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink>
-                                Sell
+                            <NavLink tag={Link} to="/searchResults">
+                                SEARCH RESULTS
                             </NavLink>
                         </NavItem>
                     </Nav>

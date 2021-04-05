@@ -12,7 +12,7 @@ import { BrowserRouter, Route, Switch, Link, withRouter } from "react-router-dom
 
 
 
-class Buy extends React.Component {
+class SearchResults extends React.Component {
     constructor(props) {
         super();
 
@@ -79,7 +79,7 @@ class Buy extends React.Component {
                         <Col className="buy-display py-2" id="house-area" sm={{ size: 12, offset: 0}} md={{ size: 12, offset: 0}} lg={{ size: 4, offset: 8}} xl={{ size: 6, offset: 6}}>
                             <Row>
                                 <Col>
-                                    <h5>{this.state.selectedBuyData.city + ", " + this.state.selectedBuyData.state} Real Estate & Homes for Sale</h5>
+                                    <h5>Location Real Estate & Homes for {this.props.match.path === "/buy" ? "Sale" : "Rent" }</h5>
                                     
                                 </Col>
                             </Row>
@@ -159,4 +159,4 @@ class Buy extends React.Component {
     }
 }
 
-export default withRouter(Buy);
+export default withRouter(SearchResults);

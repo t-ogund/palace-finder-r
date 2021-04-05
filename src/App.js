@@ -5,6 +5,7 @@ import Buy from "./components/Buy";
 import Rent from "./components/Rent";
 import Navigation from "./components/Navigation";
 import Splash from "./components/Splash";
+import SearchResults from "./components/SearchResults";
 import HomeBottom from "./components/HomeBottom";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 
