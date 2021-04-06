@@ -21,15 +21,16 @@ class SearchResults extends React.Component {
         }
         console.log("BUY PROPS: ", props)
         console.log("THIS.STATE.SELECTEDBUYDATA: ", this.state.selectedBuyData)
-        // let searchValue
-        // searchValue = `${this.state.selectedBuyData.city}, ${this.state.selectedBuyData.state}`
+        let searchValue
+        searchValue = `${this.state.selectedBuyData.city}, ${this.state.selectedBuyData.state}`
         // // let searchValue = props.match.params.searchValue
         // console.log(searchValue)
-        let searchValue = props.match
+        // let searchValue = props.match
         console.log(searchValue)
     }
         
     render() { 
+        const array = this.state.selectedBuyData.location.state.body.data.results
         // const array = this.state.selectedBuyData.buyData.data.results;
         // console.log("ARRAYPROPS: ", array)
 
@@ -39,10 +40,10 @@ class SearchResults extends React.Component {
         // } else {
         //     array = this.state.selectedBuyData.buyData.data.results;
         // } 
-        // const rows = array.reduce(function(rows, key, index) {
-        //     return (index % 2 == 0 ? rows.push([key]) : rows[rows.length-1].push(key)) && rows
-        // }, []);
-        // console.log("TESTING RENDER: ", this.state.selectedBuyData)
+        const rows = array.reduce(function(rows, key, index) {
+            return (index % 2 == 0 ? rows.push([key]) : rows[rows.length-1].push(key)) && rows
+        }, []);
+        console.log("TESTING RENDER: ", this.state.selectedBuyData)
 
         return (
             <React.Fragment>
@@ -79,7 +80,7 @@ class SearchResults extends React.Component {
                         <Col className="buy-display py-2" id="house-area" sm={{ size: 12, offset: 0}} md={{ size: 12, offset: 0}} lg={{ size: 4, offset: 8}} xl={{ size: 6, offset: 6}}>
                             <Row>
                                 <Col>
-                                    <h5>Location Real Estate & Homes for {this.props.match.path === "/buy" ? "Sale" : "Rent" }</h5>
+                                    <h5>{`${this.state.selectedBuyData.location.state.city}, ${this.state.selectedBuyData.location.state.state}`} Real Estate & Homes for {this.props.match.path === "/buy" ? "Sale" : "Rent" }</h5>
                                     
                                 </Col>
                             </Row>
@@ -87,7 +88,7 @@ class SearchResults extends React.Component {
                             <Row>
                                 <Col className="result-subsection d-flex justify-content-between">
                                     <div className="number-results">
-                                        <p>Number results </p>
+                                        <p>{this.state.selectedBuyData.location.state.body.data.count} Results</p>
                                     </div>
                                     <div className="result-filter">
                                         <p>Sort By: Dropdown goes here</p>
@@ -97,7 +98,7 @@ class SearchResults extends React.Component {
 
                             <Row>
                                 <Col className="" lg={12}>
-                                {/* {rows.map(row => (
+                                {rows.map(row => (
                                     
                                     <Row>
                                         { row.map(col => (
@@ -115,7 +116,7 @@ class SearchResults extends React.Component {
                                         ))}
                                     </Row>
                                     
-                                ))} */}
+                                ))}
                                     
                                 </Col>
                             </Row>

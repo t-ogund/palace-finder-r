@@ -8,7 +8,7 @@ import Buy from "./Buy";
 import Rent from "./Rent";
 import HomeBottom from "./HomeBottom";
 import SearchResults from "./SearchResults";
-import { BrowserRouter, Route, Switch, Link, withRouter } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Link, withRouter, Redirect } from "react-router-dom";
 
 class Splash extends React.Component {
     constructor(props) {
@@ -164,7 +164,14 @@ autoSuggest(query) {
                 </Row>
             <HomeBottom />
 
-            </Container> : <Buy buyData={this.state.buyData} query={this.state.query} city={this.state.selectedCity} state={this.state.selectedState}  />}
+            </Container> : <Redirect to={{ 
+                pathname: "/buy", 
+                state: {
+                    city: this.state.selectedCity, 
+                        state: this.state.selectedState,
+                        body: this.state.buyData
+                }
+                    }} />}
 
 
             </Switch>
