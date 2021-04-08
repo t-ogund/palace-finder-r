@@ -30,8 +30,8 @@ class Buy extends React.Component {
     }
         
     render() { 
-        // const array = this.state.selectedBuyData.buyData.data.results;
-        // console.log("ARRAYPROPS: ", array)
+        const array = this.state.selectedBuyData.buyData.data.results;
+        console.log("ARRAYPROPS: ", array)
 
         // let array;
         // if (this.state.selectedBuyData.query === "") {

@@ -8,7 +8,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import comingSoon from "../assets/coming-soon.jpg";
 import AutoComplete from "./AutoComplete";
-import { BrowserRouter, Route, Switch, Link, withRouter } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Link, withRouter, Redirect } from "react-router-dom";
+import Rent from "./Rent";
+import Buy from "./Buy";
 
 
 
@@ -28,31 +30,52 @@ class SearchResults extends React.Component {
         // let searchValue = props.match
         console.log(searchValue)
     }
-        
-    render() { 
-        const array = this.state.selectedBuyData.location.state.body.data.results
-        // const array = this.state.selectedBuyData.buyData.data.results;
-        // console.log("ARRAYPROPS: ", array)
-
-        // let array;
+    
+    render() {
+        // console.log("SELECTEDBUYDATA: ", this.state.selectedBuyData)
         // if (this.state.selectedBuyData.query === "") {
-        //     array = null
+        //     return <SearchResults />
         // } else {
-        //     array = this.state.selectedBuyData.buyData.data.results;
-        // } 
+        // //     console.log(this.state.selectedBuyData)
+        console.log("QUERY: ", this.state.selectedBuyData.query)
+        if (this.state.selectedBuyData.query !== "") {
+            const array = this.state.selectedBuyData.location.state.body.data.results
+            
         const rows = array.reduce(function(rows, key, index) {
             return (index % 2 == 0 ? rows.push([key]) : rows[rows.length-1].push(key)) && rows
         }, []);
-        console.log("TESTING RENDER: ", this.state.selectedBuyData)
+        // console.log("TESTING RENDER: ", this.state.selectedBuyData)
+        const test = rows.map(row => (
+                                    
+            <Row>
+                { row.map(col => (
+                <Col xl={6} lg={12} md={6}>
+                    {<PropertyCard 
+                    key={col.property_id}
+                    cost={col.list_price} 
+                    beds={col.description.beds}
+                    baths={col.description.baths}
+                    sqft={col.description.sqft}
+                    address={col.permalink}
+                    photo={col.photo_count === 0 ? comingSoon : col.photos[0].href}
+                    />}
+                </Col>
+                ))}
+            </Row>
+            
+        ))
+        }
+        
 
         return (
             <React.Fragment>
-                {/* <Navigation /> */}
+            {this.state.selectedBuyData.query === "" ? console.log("empty") : console.log("not empty")}
+
                 <Container fluid>
                     <Row className="buy-input-buttons pt-4 fixed-top bg-white">
                         <Col xl={2} lg={4} md={6}>
                             <InputGroup className="px-3">
-                            {/* name={} value={} */}
+                            
                                 <Input className="buy-input" />
                                 <InputGroupAddon className="buy-add-on" addonType="append"><Button className="bg-white text-primary"><FontAwesomeIcon icon={faSearch}></FontAwesomeIcon></Button></InputGroupAddon>
                             </InputGroup>
@@ -68,10 +91,12 @@ class SearchResults extends React.Component {
                     </Row>
                 </Container>
 
-                {/* MAP SECTION */}
+                {/* {Object.keys(this.state.selectedBuyData).length === 0 ? console.log("ZEEEEEED!") : console.log("GOTCHA BITCH!")}
+                {console.log("TYPE: ", typeof this.state.selectedBuyData)} */}
+                
 
                 <Container fluid className="buy-subsection">
-                    {/* MAP ROW */}
+                  
                     <Row className="map-row">
                         <Col className="h-100 py-2 d-flex align-items-center justify-content-center fixed-top" id="left" sm={12} md={6} lg={8} xl={6}>
                             <Map />
@@ -80,15 +105,15 @@ class SearchResults extends React.Component {
                         <Col className="buy-display py-2" id="house-area" sm={{ size: 12, offset: 0}} md={{ size: 12, offset: 0}} lg={{ size: 4, offset: 8}} xl={{ size: 6, offset: 6}}>
                             <Row>
                                 <Col>
-                                    <h5>{`${this.state.selectedBuyData.location.state.city}, ${this.state.selectedBuyData.location.state.state}`} Real Estate & Homes for {this.props.match.path === "/buy" ? "Sale" : "Rent" }</h5>
+                                    {/* <h5>{`${this.state.selectedBuyData.location.state.city}, ${this.state.selectedBuyData.location.state.state}`} Real Estate & Homes for {this.props.match.path === "/buy" ? "Sale" : "Rent" }</h5> */}
                                     
                                 </Col>
                             </Row>
-                            {/* HOUSE DISPLAY AREA */}
+                        
                             <Row>
                                 <Col className="result-subsection d-flex justify-content-between">
                                     <div className="number-results">
-                                        <p>{this.state.selectedBuyData.location.state.body.data.count} Results</p>
+                                        {/* <p>{this.state.selectedBuyData.location.state.body.data.count} Results</p> */}
                                     </div>
                                     <div className="result-filter">
                                         <p>Sort By: Dropdown goes here</p>
@@ -98,58 +123,14 @@ class SearchResults extends React.Component {
 
                             <Row>
                                 <Col className="" lg={12}>
-                                {rows.map(row => (
-                                    
-                                    <Row>
-                                        { row.map(col => (
-                                        <Col xl={6} lg={12} md={6}>
-                                            {<PropertyCard 
-                                            key={col.property_id}
-                                            cost={col.list_price} 
-                                            beds={col.description.beds}
-                                            baths={col.description.baths}
-                                            sqft={col.description.sqft}
-                                            address={col.permalink}
-                                            photo={col.photo_count === 0 ? comingSoon : col.photos[0].href}
-                                            />}
-                                        </Col>
-                                        ))}
-                                    </Row>
-                                    
-                                ))}
+
+                               {this.test}
+                                
                                     
                                 </Col>
                             </Row>
 
-                            {/* <Row className="bg-danger">
-                                        <Col className="bg-success" xl={6} lg={12} sm={6}>
-                                            <PropertyCard cost={this.state.salePrice}
-                                             beds={this.state.saleBeds}
-                                             baths={this.state.saleBaths}
-                                             sqft={this.state.sqft} />
-                                        </Col>
-                                        <Col className="bg-info" xl={6} lg={12} sm={6}>
-                                            <PropertyCard cost={this.state.salePrice}
-                                             beds={this.state.saleBeds}
-                                             baths={this.state.saleBaths}
-                                             sqft={this.state.sqft} />
-
-                                        </Col>
-                                    </Row>
-                                    <Row className="bg-warning">
-                                        <Col className="bg-success" xl={6} lg={12} sm={6}>
-                                            <PropertyCard cost={this.state.salePrice}
-                                             beds={this.state.saleBeds}
-                                             baths={this.state.saleBaths}
-                                             sqft={this.state.sqft} />
-                                        </Col>
-                                        <Col className="bg-info" xl={6} lg={12} sm={6}>
-                                            <PropertyCard cost={this.state.salePrice}
-                                             beds={this.state.saleBeds}
-                                             baths={this.state.saleBaths}
-                                             sqft={this.state.sqft} />
-                                        </Col>
-                                    </Row> */}
+            
 
                         </Col>
                     </Row>
@@ -157,6 +138,8 @@ class SearchResults extends React.Component {
 
             </React.Fragment>
         )
+        
+        
     }
 }
 

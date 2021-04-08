@@ -130,6 +130,10 @@
   margin-top: 500px;
 }
 
+.selected  {
+  color: red !important;
+}
+
 @media only screen and (max-width: 1000px) {
   #bed-bath, #home-type {
     display: none;
