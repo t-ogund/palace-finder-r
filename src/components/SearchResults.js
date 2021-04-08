@@ -45,7 +45,7 @@ class SearchResults extends React.Component {
             return (index % 2 == 0 ? rows.push([key]) : rows[rows.length-1].push(key)) && rows
         }, []);
         // console.log("TESTING RENDER: ", this.state.selectedBuyData)
-        const test = rows.map(row => (
+        var test = rows.map(row => (
                                     
             <Row>
                 { row.map(col => (
@@ -64,9 +64,10 @@ class SearchResults extends React.Component {
             </Row>
             
         ))
+console.log(test)
+
         }
         
-
         return (
             <React.Fragment>
             {this.state.selectedBuyData.query === "" ? console.log("empty") : console.log("not empty")}
@@ -124,7 +125,7 @@ class SearchResults extends React.Component {
                             <Row>
                                 <Col className="" lg={12}>
 
-                               {this.test}
+                               {test}
                                 
                                     
                                 </Col>
