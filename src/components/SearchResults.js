@@ -11,6 +11,7 @@ import AutoComplete from "./AutoComplete";
 import { BrowserRouter, Route, Switch, Link, withRouter, Redirect } from "react-router-dom";
 import Rent from "./Rent";
 import Buy from "./Buy";
+import PropertyMarker from "./SearchResults";
 
 
 
@@ -52,11 +53,15 @@ class SearchResults extends React.Component {
                 <Col xl={6} lg={12} md={6}>
                     {<PropertyCard 
                     key={col.property_id}
+                    type={col.description.type}
+                    saleOrRent={col.flags.is_for_rent}
                     cost={col.list_price} 
                     beds={col.description.beds}
                     baths={col.description.baths}
                     sqft={col.description.sqft}
                     address={col.permalink}
+                    lat={col.location.address.coordinate.lat}
+                    lon={col.location.address.coordinate.lon}
                     photo={col.photo_count === 0 ? comingSoon : col.photos[0].href}
                     />}
                 </Col>
@@ -100,7 +105,7 @@ console.log(test)
                   
                     <Row className="map-row">
                         <Col className="h-100 py-2 d-flex align-items-center justify-content-center fixed-top" id="left" sm={12} md={6} lg={8} xl={6}>
-                            <Map />
+                            <Map infoToDisplay={this.state.selectedBuyData} />
                         </Col>
                         <Col className="house-hidden-spacer d-none" sm={0} md={8} lg={2}></Col>
                         <Col className="buy-display py-2" id="house-area" sm={{ size: 12, offset: 0}} md={{ size: 12, offset: 0}} lg={{ size: 4, offset: 8}} xl={{ size: 6, offset: 6}}>

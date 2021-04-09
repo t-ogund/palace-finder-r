@@ -5,13 +5,15 @@ import {
   } from 'reactstrap';
 import tester from "../assets/tester-house.jpg";
 import comingSoon from "../assets/coming-soon.jpg";
+import PropertyMarker from "./PropertyMarker";
 // import Buy from "./Buy";
 
 class PropertyCard extends React.Component {
-    constructor() {
+    constructor(props) {
         super();
 
         // this.state = {};
+        console.log(props)
     }
     render() {
         return (
@@ -41,7 +43,7 @@ class PropertyCard extends React.Component {
                                         <CardSubtitle tag="h6">{this.props.address}</CardSubtitle>
                                     </div>
                                     <div className="card-description-container">
-                                        <CardText><span><div className="circle-color"></div></span>House for rent</CardText>
+                                        <CardText><span><PropertyMarker propertyMarkerColor={this.props.saleOrRent} /></span>{this.props.type} for {this.props.saleOrRent === null ? "sale" : "rent"}</CardText>
                                 </div>
                             </CardBody>
                         </Card>
