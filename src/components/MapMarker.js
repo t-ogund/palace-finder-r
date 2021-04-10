@@ -7,13 +7,13 @@ class MapMarker extends React.Component {
         this.state = {
 
         }
-        console.log(props)
+        console.log("MAP MARKER: ", props)
     }
 
     render() {
 
         return(
-            <div className={this.props.propertyMarkerColor === null ? "sale-circle-color-map" : "rent-circle-color-map"}></div>
+            <div className={this.props.propertyMarkerColor === null ? "rent-circle-color-map" : "sale-circle-color-map"}></div>
         )
     }
 }
