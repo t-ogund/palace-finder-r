@@ -53,7 +53,12 @@ class SearchResults extends React.Component {
 	}
 })
 .then(response => response.json())
-.then(data => console.log(data))
+.then(data => {
+    this.setState({
+        selectedRentData: data.data.results
+    })
+    console.log("THIS.STATE.SELECTEDRENTDATA: ", this.state.selectedRentData)
+})
 .catch(err => {
 	console.error(err);
 });
@@ -64,11 +69,6 @@ class SearchResults extends React.Component {
     }
     
     render() {
-        // console.log("SELECTEDBUYDATA: ", this.state.selectedBuyData)
-        // if (this.state.selectedBuyData.query === "") {
-        //     return <SearchResults />
-        // } else {
-        // //     console.log(this.state.selectedBuyData)
         console.log("QUERY: ", this.state.selectedBuyData.query)
         if (this.state.selectedBuyData.query !== "") {
             const array = this.state.selectedBuyData.location.state.body.data.results
@@ -76,8 +76,8 @@ class SearchResults extends React.Component {
         const rows = array.reduce(function(rows, key, index) {
             return (index % 2 == 0 ? rows.push([key]) : rows[rows.length-1].push(key)) && rows
         }, []);
-        // console.log("TESTING RENDER: ", this.state.selectedBuyData)
-        var test = rows.map(row => (
+      
+        var propertiesForSale = rows.map(row => (
                                     
             <Row>
                 { row.map(col => (
@@ -100,9 +100,45 @@ class SearchResults extends React.Component {
             </Row>
             
         ))
-console.log(test)
+console.log(propertiesForSale)
 
+        const rentalArray = this.state.selectedRentData
+
+        const rentalRows = rentalArray.reduce(function(rentalRows, key, index) {
+            return (index % 2 == 0 ? rentalRows.push([key]) : rentalRows[rentalRows.length-1].push(key)) && rentalRows
+        }, []);
+
+        var propertiesForRent = rentalRows.map(rentalRow => (
+                                    
+            <Row>
+                { rentalRow.map(rentCol => (
+                <Col xl={6} lg={12} md={6}>
+                    {<PropertyCard 
+                    key={rentCol.property_id}
+                    type={rentCol.description.type}
+                    saleOrRent={rentCol.flags.is_for_rent}
+                    cost={rentCol.list_price} 
+                    beds={rentCol.description.beds}
+                    baths={rentCol.description.baths}
+                    sqft={rentCol.description.sqft}
+                    address={rentCol.permalink}
+                    lat={rentCol.location.address.coordinate.lat}
+                    lon={rentCol.location.address.coordinate.lon}
+                    photo={rentCol.photo_count === 0 ? comingSoon : rentCol.photos[0].href}
+                    />}
+                </Col>
+                ))}
+            </Row>
+            
+        ))
+        console.log("PROPERTIES FOR RENT: ", propertiesForRent)
         }
+
+        if (this.props.location.pathname === "/buy") {
+            console.log("YOU ARE ON THE BUY PAGE")
+        } else if (this.props.location.pathname === "/rent") {
+                console.log("YOU ARE ON THE RENT PAGE")
+            }
         
         return (
             <React.Fragment>
@@ -161,7 +197,7 @@ console.log(test)
                             <Row>
                                 <Col className="" lg={12}>
 
-                               {test}
+                               {propertiesForSale}
                                 
                                     
                                 </Col>
