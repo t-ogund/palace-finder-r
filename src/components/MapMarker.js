@@ -7,7 +7,7 @@ class MapMarker extends React.Component {
         this.state = {
 
         }
-        console.log("MAP MARKER: ", props)
+        // console.log("MAP MARKER: ", props)
     }
 
     render() {

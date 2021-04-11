@@ -13,7 +13,7 @@ class PropertyCard extends React.Component {
         super();
 
         // this.state = {};
-        console.log(props)
+        // console.log(props)
     }
     render() {
         return (

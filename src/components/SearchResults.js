@@ -20,7 +20,8 @@ class SearchResults extends React.Component {
         super();
 
         this.state = {
-            selectedBuyData: props
+            selectedBuyData: props,
+            selectedRentData: []
         }
         console.log("BUY PROPS: ", props)
         console.log("THIS.STATE.SELECTEDBUYDATA: ", this.state.selectedBuyData)
@@ -30,6 +31,36 @@ class SearchResults extends React.Component {
         // console.log(searchValue)
         // let searchValue = props.match
         console.log(searchValue)
+        // console.log("Set up CITY: ", props.location.state.city)
+        // console.log("Set up STATE: ", props.location.state.state)
+
+        // const rentCity = props.location.state.city
+        // const rentState = props.location.state.state
+
+    }
+    
+    // if (this.state.selectedBuyData) {
+    //     console.log("hello")
+    // }
+    componentDidMount() {
+        if (this.props.location.state) {
+            // console.log("hello")
+            fetch(`https://realtor-com-real-estate.p.rapidapi.com/for-rent?city=${this.props.location.state.city}&state_code=${this.props.location.state.state}&limit=10&offset=0`, {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": "b83c4c021amsh3983c7298d63292p1155a9jsnaa9b026a3b17",
+		"x-rapidapi-host": "realtor-com-real-estate.p.rapidapi.com"
+	}
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(err => {
+	console.error(err);
+});
+        } else {
+            <SearchResults />
+        }
+        
     }
     
     render() {

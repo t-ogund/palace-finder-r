@@ -7,7 +7,7 @@ class PropertyMarker extends React.Component {
         this.state = {
 
         }
-        console.log("PROPERTY MARKER PROPS: ", props)
+        // console.log("PROPERTY MARKER PROPS: ", props)
     }
 
     render() {
