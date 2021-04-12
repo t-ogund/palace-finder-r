@@ -31,7 +31,7 @@ class Map extends React.Component {
         super(props);
 
         this.state = {
-
+            
         }
         console.log("MAP PROPS, MY BOY: ", props)
     }
@@ -47,6 +47,7 @@ class Map extends React.Component {
     
 
     render() {
+        console.log(this.props)
         const API_KEY = process.env.REACT_APP_MAP_API_KEY        
         if (this.props.infoToDisplay.query !== "") {
         const exactLocationArray = this.props.infoToDisplay.location.state.body.data.results
@@ -57,7 +58,7 @@ class Map extends React.Component {
                     defaultCenter={ this.props.center }
                     defaultZoom={ this.props.zoom }
                 >
-                {exactLocationArray.map(marker => <MapMarker lat={marker.location.address.coordinate.lat} lng={marker.location.address.coordinate.lon} />)}
+                {exactLocationArray.map(marker => <MapMarker lat={marker.location.address.coordinate.lat} lng={marker.location.address.coordinate.lon} path={this.props.path} />)}
     
                 </GoogleMapReact>
             </div>

@@ -172,7 +172,7 @@ console.log(propertiesForSale)
                   
                     <Row className="map-row">
                         <Col className="h-100 py-2 d-flex align-items-center justify-content-center fixed-top" id="left" sm={12} md={6} lg={8} xl={6}>
-                            <Map infoToDisplay={this.state.selectedBuyData} />
+                            <Map infoToDisplay={this.state.selectedBuyData} path={this.props.location.pathname} />
                         </Col>
                         <Col className="house-hidden-spacer d-none" sm={0} md={8} lg={2}></Col>
                         <Col className="buy-display py-2" id="house-area" sm={{ size: 12, offset: 0}} md={{ size: 12, offset: 0}} lg={{ size: 4, offset: 8}} xl={{ size: 6, offset: 6}}>
@@ -197,7 +197,7 @@ console.log(propertiesForSale)
                             <Row>
                                 <Col className="" lg={12}>
 
-                               {propertiesForSale}
+                               {this.props.location.pathname === "/buy" ? propertiesForSale : propertiesForRent}
                                 
                                     
                                 </Col>

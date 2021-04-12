@@ -35,7 +35,7 @@
 }
 
 .rent-circle-color-map {
-  /* border: 5px solid white; */
+  border: 2px solid white;
   height: 10px;
   width: 10px;
   border-radius: 50%;
@@ -54,7 +54,7 @@
 }
 
 .sale-circle-color-map {
-  border: 1px solid white;
+  border: 2px solid white;
   height: 12px;
   width: 12px;
   border-radius: 50%;
