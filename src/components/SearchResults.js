@@ -27,24 +27,16 @@ class SearchResults extends React.Component {
         console.log("THIS.STATE.SELECTEDBUYDATA: ", this.state.selectedBuyData)
         let searchValue
         searchValue = `${this.state.selectedBuyData.city}, ${this.state.selectedBuyData.state}`
-        // // let searchValue = props.match.params.searchValue
-        // console.log(searchValue)
-        // let searchValue = props.match
+        
         console.log(searchValue)
-        // console.log("Set up CITY: ", props.location.state.city)
-        // console.log("Set up STATE: ", props.location.state.state)
-
-        // const rentCity = props.location.state.city
-        // const rentState = props.location.state.state
+  
 
     }
     
-    // if (this.state.selectedBuyData) {
-    //     console.log("hello")
-    // }
+ 
     componentDidMount() {
         if (this.props.location.state) {
-            // console.log("hello")
+         
             fetch(`https://realtor-com-real-estate.p.rapidapi.com/for-rent?city=${this.props.location.state.city}&state_code=${this.props.location.state.state}&limit=10&offset=0`, {
 	"method": "GET",
 	"headers": {
@@ -164,8 +156,7 @@ console.log(propertiesForSale)
                     </Row>
                 </Container>
 
-                {/* {Object.keys(this.state.selectedBuyData).length === 0 ? console.log("ZEEEEEED!") : console.log("GOTCHA BITCH!")}
-                {console.log("TYPE: ", typeof this.state.selectedBuyData)} */}
+    
                 
 
                 <Container fluid className="buy-subsection">

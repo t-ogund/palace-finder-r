@@ -21,10 +21,7 @@ class Buy extends React.Component {
         }
         console.log("BUY PROPS: ", props)
         console.log("THIS.STATE.SELECTEDBUYDATA: ", this.state.selectedBuyData)
-        // let searchValue
-        // searchValue = `${this.state.selectedBuyData.city}, ${this.state.selectedBuyData.state}`
-        // // let searchValue = props.match.params.searchValue
-        // console.log(searchValue)
+        
         let searchValue = props.match
         console.log(searchValue)
     }

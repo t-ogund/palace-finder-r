@@ -50,27 +50,22 @@ class AutoComplete extends React.Component {
                 });
                     }
 
-                    // componentWillUnmount() {
-                    //     <Buy />
-                    // }
     render() {
         console.log("Selected City: ", this.state.selectedCity)
         console.log("Selected State: ", this.state.selectedState)
         console.log("Is Clicked? ", this.state.isClicked)
 
-        // console.log(this.state.suggestedLocationResults) 
-        // console.log(<Buy />)       
-        // console.log(this.props.city, this.props.state_code)
+    
         return(
-            // <ListGroup>
+           
                 <Link to="/buy">
                     <ListGroupItem city={this.props.city} state={this.props.state_code} onClick={this.handleSuggestion} tag="a" 
-                    // href="/buy" 
+                 
                     action>{this.props.city}, {this.props.state_code}
                     
                     </ListGroupItem>
                 </Link>
-            // </ListGroup>
+        
         )
     }
 }

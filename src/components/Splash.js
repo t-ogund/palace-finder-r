@@ -26,28 +26,12 @@ class Splash extends React.Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
-    
-
-//     componentDidMount() {
-//         fetch("https://realtor-com-real-estate.p.rapidapi.com/location/suggest?input=New", {
-// 	"method": "GET",
-// 	"headers": {
-// 		"x-rapidapi-key": "b83c4c021amsh3983c7298d63292p1155a9jsnaa9b026a3b17",
-// 		"x-rapidapi-host": "realtor-com-real-estate.p.rapidapi.com"
-// 	}
-// })
-// .then(response => response.json())
-// .then(data => console.log(data))
-// .catch(err => {
-// 	console.error(err);
-// });
-//     }
 
 handleChange(e) {
     this.setState({
         query: e.target.value
     })
-    // console.log("THIS.STATE.QUERY: ", this.state.query)
+  
     if (this.state.query.length >= 3) {
         fetch(`https://realtor-com-real-estate.p.rapidapi.com/location/suggest?input=${this.state.query}`, {
 	"method": "GET",
@@ -72,15 +56,14 @@ handleChange(e) {
 
 
 handleClick(e) {
-    // console.log(e.target.textContent);
-    // console.log(e.target.textContent)
+    
     const parsedCityState = e.target.textContent.split(" ")
-    // console.log(parsedCityState)
+    
     const city = parsedCityState[0].slice(0, -1);
     const state = parsedCityState[1]
     let refCityState = `${city}, ${state}`;
     
-    // console.log("CITY: ", city, "STATE: ", state);
+  
 
 
 
@@ -108,12 +91,6 @@ handleClick(e) {
 	console.error(err);
 });
 
-//TEST! MAY REMOVE!
-// let searchValue = this.state.selectedObject;
-// let path = `/buy/${searchValue}`;
-// this.props.history.push(path);
-// this.props.onSearch(this.state.searchValue);
-// e.currentTarget.reset();
 
 }
 
