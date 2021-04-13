@@ -21,7 +21,8 @@ class SearchResults extends React.Component {
 
         this.state = {
             selectedBuyData: props,
-            selectedRentData: []
+            selectedRentData: [],
+            buyLinkData: []
         }
         console.log("BUY PROPS: ", props)
         console.log("THIS.STATE.SELECTEDBUYDATA: ", this.state.selectedBuyData)
@@ -55,8 +56,38 @@ class SearchResults extends React.Component {
 	console.error(err);
 });
         } else {
-            <SearchResults />
+            // <SearchResults />
+            fetch("https://realtor-com-real-estate.p.rapidapi.com/for-sale?city=Minneapolis&state_code=MN&offset=0&limit=10", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": "b83c4c021amsh3983c7298d63292p1155a9jsnaa9b026a3b17",
+		"x-rapidapi-host": "realtor-com-real-estate.p.rapidapi.com"
+	}
+})
+.then(response => response.json())
+.then(data => {
+    this.setState({
+        buyLinkData: data.data.results
+    })
+    console.log(data.data.results)
+})
+.catch(err => {
+	console.error(err);
+});
         }
+
+        fetch("https://realtor-com-real-estate.p.rapidapi.com/for-rent?city=Minneapolis&state_code=MN&limit=10&offset=0", {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-key": "b83c4c021amsh3983c7298d63292p1155a9jsnaa9b026a3b17",
+                "x-rapidapi-host": "realtor-com-real-estate.p.rapidapi.com"
+            }
+        })
+        .then(response => response.json())
+        .then(data => console.log("Rental Link Data", data))
+        .catch(err => {
+            console.error(err);
+        }); 
         
     }
     
@@ -65,34 +96,34 @@ class SearchResults extends React.Component {
         if (this.state.selectedBuyData.query !== "") {
             const array = this.state.selectedBuyData.location.state.body.data.results
             
-        const rows = array.reduce(function(rows, key, index) {
-            return (index % 2 == 0 ? rows.push([key]) : rows[rows.length-1].push(key)) && rows
-        }, []);
+            const rows = array.reduce(function(rows, key, index) {
+                return (index % 2 == 0 ? rows.push([key]) : rows[rows.length-1].push(key)) && rows
+            }, []);
       
-        var propertiesForSale = rows.map(row => (
-                                    
-            <Row>
-                { row.map(col => (
-                <Col xl={6} lg={12} md={6}>
-                    {<PropertyCard 
-                    key={col.property_id}
-                    type={col.description.type}
-                    saleOrRent={col.flags.is_for_rent}
-                    cost={col.list_price} 
-                    beds={col.description.beds}
-                    baths={col.description.baths}
-                    sqft={col.description.sqft}
-                    address={col.permalink}
-                    lat={col.location.address.coordinate.lat}
-                    lon={col.location.address.coordinate.lon}
-                    photo={col.photo_count === 0 ? comingSoon : col.photos[0].href}
-                    />}
-                </Col>
-                ))}
-            </Row>
-            
-        ))
-console.log(propertiesForSale)
+            var propertiesForSale = rows.map(row => (
+                                        
+                <Row>
+                    { row.map(col => (
+                    <Col xl={6} lg={12} md={6}>
+                        {<PropertyCard 
+                        key={col.property_id}
+                        type={col.description.type}
+                        saleOrRent={col.flags.is_for_rent}
+                        cost={col.list_price} 
+                        beds={col.description.beds}
+                        baths={col.description.baths}
+                        sqft={col.description.sqft}
+                        address={col.permalink}
+                        lat={col.location.address.coordinate.lat}
+                        lon={col.location.address.coordinate.lon}
+                        photo={col.photo_count === 0 ? comingSoon : col.photos[0].href}
+                        />}
+                    </Col>
+                    ))}
+                </Row>
+                
+            ))
+            console.log(propertiesForSale)
 
         const rentalArray = this.state.selectedRentData
 
@@ -124,14 +155,60 @@ console.log(propertiesForSale)
             
         ))
         console.log("PROPERTIES FOR RENT: ", propertiesForRent)
+        } else if (this.props.location.pathname === "/buy") {
+            console.log("THIS.STATE.BUYLINKDATA: ", this.state.buyLinkData);
+
+            const buyLinkArray = this.state.buyLinkData;
+
+            const buyLinkArrayRows = buyLinkArray.reduce(function(buyLinkArrayRows, key, index) {
+                return (index % 2 == 0 ? buyLinkArrayRows.push([key]) : buyLinkArrayRows[buyLinkArrayRows.length-1].push(key)) && buyLinkArrayRows
+            }, []);
+
+            var buyLinkPropertiesForSale = buyLinkArrayRows.map(buyLinkArrayRow => (
+                                    
+                <Row>
+                    { buyLinkArrayRow.map(rentCol => (
+                    <Col xl={6} lg={12} md={6}>
+                        {<PropertyCard 
+                        key={rentCol.property_id}
+                        type={rentCol.description.type}
+                        saleOrRent={rentCol.flags.is_for_rent}
+                        cost={rentCol.list_price} 
+                        beds={rentCol.description.beds}
+                        baths={rentCol.description.baths}
+                        sqft={rentCol.description.sqft}
+                        address={rentCol.permalink}
+                        lat={rentCol.location.address.coordinate.lat}
+                        lon={rentCol.location.address.coordinate.lon}
+                        photo={rentCol.photo_count === 0 ? comingSoon : rentCol.photos[0].href}
+                        />}
+                    </Col>
+                    ))}
+                </Row>
+                
+            ))
+            console.log("BUY LINK PROPERTIES FOR SALE: ", buyLinkPropertiesForSale)
         }
 
         if (this.props.location.pathname === "/buy") {
             console.log("YOU ARE ON THE BUY PAGE")
         } else if (this.props.location.pathname === "/rent") {
-                console.log("YOU ARE ON THE RENT PAGE")
+                console.log("YOU ARE ON THE RENT PAGE");
             }
         
+            let buyRender;
+            let rentRender;
+
+            if (this.state.selectedBuyData.query === "" && this.props.location.pathname === "/buy") {
+                buyRender = buyLinkPropertiesForSale
+                rentRender = propertiesForRent
+            } else if (this.state.selectedBuyData.query !== "") {
+                buyRender = propertiesForSale
+                rentRender = propertiesForRent
+            }
+
+            console.log(buyRender)
+
         return (
             <React.Fragment>
             {this.state.selectedBuyData.query === "" ? console.log("empty") : console.log("not empty")}
@@ -188,8 +265,8 @@ console.log(propertiesForSale)
                             <Row>
                                 <Col className="" lg={12}>
 
-                               {this.props.location.pathname === "/buy" ? propertiesForSale : propertiesForRent}
-                                
+                               {/* {this.props.location.pathname === "/buy" ? propertiesForSale : propertiesForRent} */}
+                                { this.props.location.pathname === "/buy" ? buyRender : rentRender }
                                     
                                 </Col>
                             </Row>
