@@ -22,7 +22,8 @@ class SearchResults extends React.Component {
         this.state = {
             selectedBuyData: props,
             selectedRentData: [],
-            buyLinkData: []
+            buyLinkData: [],
+            rentLinkData: []
         }
         console.log("BUY PROPS: ", props)
         console.log("THIS.STATE.SELECTEDBUYDATA: ", this.state.selectedBuyData)
@@ -84,7 +85,12 @@ class SearchResults extends React.Component {
             }
         })
         .then(response => response.json())
-        .then(data => console.log("Rental Link Data", data))
+        .then(data => {
+            this.setState({
+                rentLinkData: data.data.results
+            })
+            console.log("RENT DATA, MY BOY: ", this.state.rentLinkData)
+        })
         .catch(err => {
             console.error(err);
         }); 
@@ -167,20 +173,20 @@ class SearchResults extends React.Component {
             var buyLinkPropertiesForSale = buyLinkArrayRows.map(buyLinkArrayRow => (
                                     
                 <Row>
-                    { buyLinkArrayRow.map(rentCol => (
+                    { buyLinkArrayRow.map(buyLinkCol => (
                     <Col xl={6} lg={12} md={6}>
                         {<PropertyCard 
-                        key={rentCol.property_id}
-                        type={rentCol.description.type}
-                        saleOrRent={rentCol.flags.is_for_rent}
-                        cost={rentCol.list_price} 
-                        beds={rentCol.description.beds}
-                        baths={rentCol.description.baths}
-                        sqft={rentCol.description.sqft}
-                        address={rentCol.permalink}
-                        lat={rentCol.location.address.coordinate.lat}
-                        lon={rentCol.location.address.coordinate.lon}
-                        photo={rentCol.photo_count === 0 ? comingSoon : rentCol.photos[0].href}
+                        key={buyLinkCol.property_id}
+                        type={buyLinkCol.description.type}
+                        saleOrRent={buyLinkCol.flags.is_for_rent}
+                        cost={buyLinkCol.list_price} 
+                        beds={buyLinkCol.description.beds}
+                        baths={buyLinkCol.description.baths}
+                        sqft={buyLinkCol.description.sqft}
+                        address={buyLinkCol.permalink}
+                        lat={buyLinkCol.location.address.coordinate.lat}
+                        lon={buyLinkCol.location.address.coordinate.lon}
+                        photo={buyLinkCol.photo_count === 0 ? comingSoon : buyLinkCol.photos[0].href}
                         />}
                     </Col>
                     ))}
@@ -188,8 +194,39 @@ class SearchResults extends React.Component {
                 
             ))
             console.log("BUY LINK PROPERTIES FOR SALE: ", buyLinkPropertiesForSale)
-        }
+        } else if (this.props.location.pathname === "/rent") {
 
+            const rentLinkArray = this.state.rentLinkData;
+
+            const rentLinkArrayRows = rentLinkArray.reduce(function(rentLinkArrayRows, key, index) {
+                return (index % 2 == 0 ? rentLinkArrayRows.push([key]) : rentLinkArrayRows[rentLinkArrayRows.length-1].push(key)) && rentLinkArrayRows
+            }, []);
+
+            var rentLinkPropertiesForRent = rentLinkArrayRows.map(rentLinkArrayRow => (
+                                    
+                <Row>
+                    { rentLinkArrayRow.map(rentLinkCol => (
+                    <Col xl={6} lg={12} md={6}>
+                        {<PropertyCard 
+                        key={rentLinkCol.property_id}
+                        type={rentLinkCol.description.type}
+                        saleOrRent={rentLinkCol.flags.is_for_rent}
+                        cost={rentLinkCol.list_price} 
+                        beds={rentLinkCol.description.beds}
+                        baths={rentLinkCol.description.baths}
+                        sqft={rentLinkCol.description.sqft}
+                        address={rentLinkCol.permalink}
+                        lat={rentLinkCol.location.address.coordinate.lat}
+                        lon={rentLinkCol.location.address.coordinate.lon}
+                        photo={rentLinkCol.photo_count === 0 ? comingSoon : rentLinkCol.photos[0].href}
+                        />}
+                    </Col>
+                    ))}
+                </Row>
+                
+            ))
+            console.log("RENT LINK PROPERTIES FOR RENT: ", rentLinkPropertiesForRent)
+                        }
         if (this.props.location.pathname === "/buy") {
             console.log("YOU ARE ON THE BUY PAGE")
         } else if (this.props.location.pathname === "/rent") {
@@ -199,9 +236,9 @@ class SearchResults extends React.Component {
             let buyRender;
             let rentRender;
 
-            if (this.state.selectedBuyData.query === "" && this.props.location.pathname === "/buy") {
+            if (this.state.selectedBuyData.query === "" && (this.props.location.pathname === "/buy" || this.props.location.pathname === "/rent")) {
                 buyRender = buyLinkPropertiesForSale
-                rentRender = propertiesForRent
+                rentRender = rentLinkPropertiesForRent
             } else if (this.state.selectedBuyData.query !== "") {
                 buyRender = propertiesForSale
                 rentRender = propertiesForRent
