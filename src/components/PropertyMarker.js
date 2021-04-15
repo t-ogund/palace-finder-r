@@ -3,11 +3,6 @@ import React from "react";
 class PropertyMarker extends React.Component {
     constructor(props) {
         super(props)
-
-        this.state = {
-
-        }
-   
     }
 
     render() {

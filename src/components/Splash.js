@@ -3,9 +3,6 @@ import {Container, Col, Row, Input,
 InputGroup, InputGroupAddon, Button,
 ListGroup, ListGroupItem} from "reactstrap";
 import house from "../assets/house.jpg";
-import AutoComplete from "./AutoComplete";
-import Buy from "./Buy";
-import Rent from "./Rent";
 import HomeBottom from "./HomeBottom";
 import SearchResults from "./SearchResults";
 import { BrowserRouter, Route, Switch, Link, withRouter, Redirect } from "react-router-dom";
@@ -45,7 +42,6 @@ handleChange(e) {
     this.setState({
         suggestionResults: body.data
     })
-    console.log("SUGGESTION RESULTS: ", this.state.suggestionResults)
 })
 .catch(err => {
 	console.error(err);
@@ -56,12 +52,12 @@ handleChange(e) {
 
 
 handleClick(e) {
-    
     const parsedCityState = e.target.textContent.split(" ")
     
     const city = parsedCityState[0].slice(0, -1);
     const state = parsedCityState[1]
     let refCityState = `${city}, ${state}`;
+    console.log(parsedCityState)
     
   
 
@@ -85,7 +81,6 @@ handleClick(e) {
         selectedState: state,
         selectedObject: e.target.textContent
     })
-    console.log("THIS.STATE.BUYDATA: ", this.state.buyData)
 })
 .catch(err => {
 	console.error(err);
@@ -94,30 +89,17 @@ handleClick(e) {
 
 }
 
-autoSuggest(query) {
-    
-}
-
     render() {
         const results = this.state.suggestionResults.slice(0, 5)
     return (
         <React.Fragment>
             <Switch>
-            {/* <Route path="/buy" render={({ match }) => (
-                <Buy query={this.state.query} match={match} /> )} >
-            </Route>
-            <Route path="/rent" render={({ match }) => (
-                <Rent query={this.state.query} match={match} /> )} >
-            </Route> */}
             <Route path="/buy" render={({ match }) => (
                 <SearchResults query={this.state.query} match={match} /> )} >
             </Route>
             <Route path="/rent" render={({ match }) => (
                 <SearchResults query={this.state.query} match={match} /> )} >
             </Route>
-            {/* <Route path="/searchResults" render={({ match }) => (
-                <SearchResults query={this.state.query} match={match} /> )} >
-            </Route> */}
 
 
             {this.state.buyData.length === 0 ? <Container fluid className="splash">
@@ -125,9 +107,9 @@ autoSuggest(query) {
                     <Col className="col-md-4">
                         <h2>{this.state.query}</h2>
                         <InputGroup className="">
-                            <Input ref={ (input) => this.refCityState = input } onChange={this.handleChange} type="text" className="splash-input" />
+                            <Input placeholder='Enter city, i.e. "Minneapolis"' ref={ (input) => this.refCityState = input } onChange={this.handleChange} type="text" className="splash-input" />
                             <InputGroupAddon addonType="append">
-                                <Button onClick={this.handleClick}>Search</Button>
+                                {/* <Button onClick={this.handleClick}>Search</Button> */}
                             </InputGroupAddon>
                         </InputGroup>
                         <ListGroup>

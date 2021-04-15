@@ -1,8 +1,0 @@
-<Redirect to={{ 
-                pathname: "/buy", 
-                state: {
-                    city: this.state.selectedCity, 
-                        state: this.state.selectedState,
-                        body: this.state.buyData
-                }
-                    }} />}

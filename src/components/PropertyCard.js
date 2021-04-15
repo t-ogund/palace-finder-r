@@ -6,13 +6,10 @@ import {
 import tester from "../assets/tester-house.jpg";
 import comingSoon from "../assets/coming-soon.jpg";
 import PropertyMarker from "./PropertyMarker";
-// import Buy from "./Buy";
 
 class PropertyCard extends React.Component {
     constructor(props) {
         super();
-
-        // this.state = {};
         console.log(props)
     }
     render() {

@@ -1,5 +1,4 @@
 import React from "react";
-import Navigation from "./Navigation";
 import { Row, Col, Container, Button,
      Input, InputGroup, InputGroupAddon } from "reactstrap";
 import PropertyCard from "./PropertyCard";
@@ -7,13 +6,7 @@ import Map from "./Map";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import comingSoon from "../assets/coming-soon.jpg";
-import AutoComplete from "./AutoComplete";
 import { BrowserRouter, Route, Switch, Link, withRouter, Redirect } from "react-router-dom";
-import Rent from "./Rent";
-import Buy from "./Buy";
-import PropertyMarker from "./SearchResults";
-
-
 
 class SearchResults extends React.Component {
     constructor(props) {
@@ -25,13 +18,8 @@ class SearchResults extends React.Component {
             buyLinkData: [],
             rentLinkData: []
         }
-        console.log("BUY PROPS: ", props)
-        console.log("THIS.STATE.SELECTEDBUYDATA: ", this.state.selectedBuyData)
         let searchValue
         searchValue = `${this.state.selectedBuyData.city}, ${this.state.selectedBuyData.state}`
-        
-        console.log(searchValue)
-  
 
     }
 
@@ -59,13 +47,11 @@ class SearchResults extends React.Component {
     this.setState({
         selectedRentData: data.data.results
     })
-    console.log("THIS.STATE.SELECTEDRENTDATA: ", this.state.selectedRentData)
 })
 .catch(err => {
 	console.error(err);
 });
         } else {
-            // <SearchResults />
             fetch("https://realtor-com-real-estate.p.rapidapi.com/for-sale?city=Minneapolis&state_code=MN&offset=0&limit=10", {
 	"method": "GET",
 	"headers": {
@@ -78,7 +64,6 @@ class SearchResults extends React.Component {
     this.setState({
         buyLinkData: data.data.results
     })
-    console.log(data.data.results)
 })
 .catch(err => {
 	console.error(err);
@@ -97,7 +82,6 @@ class SearchResults extends React.Component {
             this.setState({
                 rentLinkData: data.data.results
             })
-            console.log("RENT DATA, MY BOY: ", this.state.rentLinkData)
         })
         .catch(err => {
             console.error(err);
@@ -106,8 +90,6 @@ class SearchResults extends React.Component {
     }
     
     render() {
-        console.log(this.props)
-        console.log("QUERY: ", this.state.selectedBuyData.query)
         if (this.state.selectedBuyData.query !== "") {
             const array = this.state.selectedBuyData.location.state.body.data.results
             
@@ -138,7 +120,6 @@ class SearchResults extends React.Component {
                 </Row>
                 
             ))
-            console.log(propertiesForSale)
 
         const rentalArray = this.state.selectedRentData
 
@@ -169,9 +150,7 @@ class SearchResults extends React.Component {
             </Row>
             
         ))
-        console.log("PROPERTIES FOR RENT: ", propertiesForRent)
         } else if (this.props.location.pathname === "/buy") {
-            console.log("THIS.STATE.BUYLINKDATA: ", this.state.buyLinkData);
 
             const buyLinkArray = this.state.buyLinkData;
 
@@ -202,7 +181,6 @@ class SearchResults extends React.Component {
                 </Row>
                 
             ))
-            console.log("BUY LINK PROPERTIES FOR SALE: ", buyLinkPropertiesForSale)
         } else if (this.props.location.pathname === "/rent") {
 
             const rentLinkArray = this.state.rentLinkData;
@@ -234,13 +212,8 @@ class SearchResults extends React.Component {
                 </Row>
                 
             ))
-            console.log("RENT LINK PROPERTIES FOR RENT: ", rentLinkPropertiesForRent)
+
                         }
-        if (this.props.location.pathname === "/buy") {
-            console.log("YOU ARE ON THE BUY PAGE")
-        } else if (this.props.location.pathname === "/rent") {
-                console.log("YOU ARE ON THE RENT PAGE");
-            }
         
             let buyRender;
             let rentRender;
@@ -253,11 +226,9 @@ class SearchResults extends React.Component {
                 rentRender = propertiesForRent
             }
 
-            console.log(buyRender)
 
         return (
             <React.Fragment>
-            {this.state.selectedBuyData.query === "" ? console.log("empty") : console.log("not empty")}
 
                 <Container fluid>
                     <Row className="buy-input-buttons pt-4 fixed-top bg-white">

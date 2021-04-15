@@ -27,16 +27,6 @@ import { faChessRook } from '@fortawesome/free-solid-svg-icons'
                                 Rent
                             </NavLink>
                         </NavItem>
-                        {/* <NavItem>
-                            <NavLink tag={Link} to="/searchResults">
-                                SEARCH RESULTS
-                            </NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink tag={Link} to="/test">
-                                TEST
-                            </NavLink>
-                        </NavItem> */}
                     </Nav>
                 </Navbar>
               </Container>
