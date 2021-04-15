@@ -33,7 +33,7 @@ class Map extends React.Component {
         this.state = {
             
         }
-        console.log("MAP PROPS, MY BOY: ", props)
+        // console.log("MAP PROPS, MY BOY: ", props)
     }
 
     static defaultProps = {

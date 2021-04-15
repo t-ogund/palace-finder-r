@@ -125,9 +125,9 @@ class SearchResults extends React.Component {
                         type={col.description.type}
                         saleOrRent={col.flags.is_for_rent}
                         cost={col.list_price} 
-                        beds={col.description.beds}
-                        baths={col.description.baths}
-                        sqft={col.description.sqft}
+                        beds={col.description.beds + " bds"}
+                        baths={col.description.baths + " ba"}
+                        sqft={col.description.sqft + " sqft"}
                         address={col.permalink}
                         lat={col.location.address.coordinate.lat}
                         lon={col.location.address.coordinate.lon}
@@ -189,9 +189,9 @@ class SearchResults extends React.Component {
                         type={buyLinkCol.description.type}
                         saleOrRent={buyLinkCol.flags.is_for_rent}
                         cost={buyLinkCol.list_price} 
-                        beds={buyLinkCol.description.beds}
-                        baths={buyLinkCol.description.baths}
-                        sqft={buyLinkCol.description.sqft}
+                        beds={buyLinkCol.description.beds + " bds"}
+                        baths={buyLinkCol.description.baths + " ba"}
+                        sqft={buyLinkCol.description.sqft + " sqft"}
                         address={buyLinkCol.permalink}
                         lat={buyLinkCol.location.address.coordinate.lat}
                         lon={buyLinkCol.location.address.coordinate.lon}
@@ -292,7 +292,7 @@ class SearchResults extends React.Component {
                         <Col className="buy-display py-2" id="house-area" sm={{ size: 12, offset: 0}} md={{ size: 12, offset: 0}} lg={{ size: 4, offset: 8}} xl={{ size: 6, offset: 6}}>
                             <Row>
                                 <Col>
-                                    {/* <h5>{`${this.state.selectedBuyData.location.state.city}, ${this.state.selectedBuyData.location.state.state}`} Real Estate & Homes for {this.props.match.path === "/buy" ? "Sale" : "Rent" }</h5> */}
+                                    <h5> Real Estate & Homes for {this.props.match.path === "/buy" ? "Sale" : "Rent" }</h5>
                                     
                                 </Col>
                             </Row>

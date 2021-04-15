@@ -13,7 +13,7 @@ class PropertyCard extends React.Component {
         super();
 
         // this.state = {};
-        // console.log(props)
+        console.log(props)
     }
     render() {
         return (
@@ -25,25 +25,25 @@ class PropertyCard extends React.Component {
                             <CardBody className="p-2 card-body">
                                 <div className="card-cost-and-details d-flex justify-content-between">
                                     <div className="card-cost-container">
-                                        <CardTitle tag="h4" className="card-cost">{this.props.cost}</CardTitle>
+                                        <CardTitle tag="h4" className="card-cost">{this.props.saleOrRent === null ? "$" + this.props.cost : " "}</CardTitle>
                                     </div>
                                     <div className="card-details-container d-flex">
                                         <div className="card-beds-container">
-                                            <CardText className="card-beds">{this.props.beds}bds</CardText>
+                                            <CardText className="card-beds">{this.props.beds}</CardText>
                                         </div>
                                         <div class="card-bath-container">
-                                            <CardText className="card-baths">{this.props.baths}ba</CardText>
+                                            <CardText className="card-baths">{this.props.baths}</CardText>
                                         </div>
                                         <div class="sqft-container">
-                                            <CardText className="sqft">{this.props.sqft}sqft</CardText>
+                                            <CardText className="sqft">{this.props.sqft}</CardText>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="card-subtitle-container">
-                                        <CardSubtitle tag="h6">{this.props.address}</CardSubtitle>
+                                        <CardSubtitle tag="h6">{this.props.address.replace(/-/g, " ").replace(/_/g, " ").slice(0, -12)}</CardSubtitle>
                                     </div>
                                     <div className="card-description-container">
-                                        <CardText><span><PropertyMarker propertyMarkerColor={this.props.saleOrRent} /></span>{this.props.type} for {this.props.saleOrRent === null ? "sale" : "rent"}</CardText>
+                                        <CardText><span><PropertyMarker propertyMarkerColor={this.props.saleOrRent} /></span>{this.props.type.charAt(0).toUpperCase() + this.props.type.slice(1).replace(/_/g, " ")} for {this.props.saleOrRent === null ? "sale" : "rent"}</CardText>
                                 </div>
                             </CardBody>
                         </Card>
