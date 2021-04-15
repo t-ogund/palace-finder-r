@@ -34,6 +34,14 @@ class SearchResults extends React.Component {
   
 
     }
+
+    handleChange(e) {
+        let rentInputQuery = e.target.value
+    }
+
+    handleClick(e) {
+        // console.log(e.target.parentElement.parentElement.children[0].value)
+    }
     
  
     componentDidMount() {
@@ -98,6 +106,7 @@ class SearchResults extends React.Component {
     }
     
     render() {
+        console.log(this.props)
         console.log("QUERY: ", this.state.selectedBuyData.query)
         if (this.state.selectedBuyData.query !== "") {
             const array = this.state.selectedBuyData.location.state.body.data.results
@@ -255,8 +264,8 @@ class SearchResults extends React.Component {
                         <Col xl={2} lg={4} md={6}>
                             <InputGroup className="px-3">
                             
-                                <Input className="buy-input" />
-                                <InputGroupAddon className="buy-add-on" addonType="append"><Button className="bg-white text-primary"><FontAwesomeIcon icon={faSearch}></FontAwesomeIcon></Button></InputGroupAddon>
+                                <Input onChange={this.handleChange} className="buy-input" />
+                                <InputGroupAddon className="buy-add-on" addonType="append"><Button onClick={this.handleClick} className="bg-white text-primary">Search</Button></InputGroupAddon>
                             </InputGroup>
                         </Col>
                         <Col xl={10} lg={8} md={6} className="px-3">
@@ -277,7 +286,7 @@ class SearchResults extends React.Component {
                   
                     <Row className="map-row">
                         <Col className="h-100 py-2 d-flex align-items-center justify-content-center fixed-top" id="left" sm={12} md={6} lg={8} xl={6}>
-                            <Map infoToDisplay={this.state.selectedBuyData} path={this.props.location.pathname} />
+                            <Map infoToDisplay={this.state.selectedBuyData} selectedRentData={this.state.selectedRentData} buyLinkData={this.state.buyLinkData} rentLinkData={this.state.rentLinkData} path={this.props.location.pathname} />
                         </Col>
                         <Col className="house-hidden-spacer d-none" sm={0} md={8} lg={2}></Col>
                         <Col className="buy-display py-2" id="house-area" sm={{ size: 12, offset: 0}} md={{ size: 12, offset: 0}} lg={{ size: 4, offset: 8}} xl={{ size: 6, offset: 6}}>
