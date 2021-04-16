@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, Container, Button,
-     Input, InputGroup, InputGroupAddon } from "reactstrap";
+     Input, InputGroup, InputGroupAddon, ListGroupItem } from "reactstrap";
 import PropertyCard from "./PropertyCard";
 import Map from "./Map";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -13,18 +13,52 @@ class SearchResults extends React.Component {
         super();
 
         this.state = {
+            inputQuery: "",
             selectedBuyData: props,
             selectedRentData: [],
             buyLinkData: [],
-            rentLinkData: []
+            rentLinkData: [],
+            secondarySuggestionResults: [],
+            saleRentToggle: false
         }
         let searchValue
         searchValue = `${this.state.selectedBuyData.city}, ${this.state.selectedBuyData.state}`
-
+        
+        this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(e) {
-        let rentInputQuery = e.target.value
+//         this.setState({
+//             inputQuery: e.target.value
+//         })
+//         if (this.state.inputQuery.length > 3) {
+//             fetch(`https://realtor-com-real-estate.p.rapidapi.com/location/suggest?input=${this.state.inputQuery}`, {
+// 	"method": "GET",
+// 	"headers": {
+// 		"x-rapidapi-key": "b83c4c021amsh3983c7298d63292p1155a9jsnaa9b026a3b17",
+// 		"x-rapidapi-host": "realtor-com-real-estate.p.rapidapi.com"
+// 	}
+// })
+// .then(response => response.json())
+// .then(body => {
+//     console.log("BODY.DATA: ", body.data)
+//     this.setState({
+//         secondarySuggestionResults: body.data
+//     })
+//     console.log(this.state.secondarySuggestionResults.slice(0, 5))
+
+// })
+// .catch(err => {
+// 	console.error(err);
+// });
+//         }
+        
+    }
+
+    handleSaleRentToggle(e) {
+        e.preventDefault()
+        console.log("hihi");
+        e.target.textContent = "For Sale"
     }
 
     handleClick(e) {
@@ -236,11 +270,14 @@ class SearchResults extends React.Component {
                             <InputGroup className="px-3">
                             
                                 <Input onChange={this.handleChange} className="buy-input" />
+                                
                                 <InputGroupAddon className="buy-add-on" addonType="append"><Button onClick={this.handleClick} className="bg-white text-primary">Search</Button></InputGroupAddon>
+                                
                             </InputGroup>
+                            
                         </Col>
                         <Col xl={10} lg={8} md={6} className="px-3">
-                            <Button outline color="primary" className="buy-filter-button">For Rent</Button>
+                            <Button outline color="primary" className="buy-filter-button" onClick={this.handleSaleRentToggle}>For Rent</Button>
                             <Button outline color="primary" className="buy-filter-button">Price</Button>
                             <Button outline color="primary" className="buy-filter-button" id="bed-bath">Bed & Bath</Button>
                             <Button outline color="primary" className="buy-filter-button" id="home-type">Home Type</Button>
@@ -258,7 +295,11 @@ class SearchResults extends React.Component {
                     <Row className="map-row">
                         <Col className="h-100 py-2 d-flex align-items-center justify-content-center fixed-top" id="left" sm={12} md={6} lg={8} xl={6}>
                             <Map infoToDisplay={this.state.selectedBuyData} selectedRentData={this.state.selectedRentData} buyLinkData={this.state.buyLinkData} rentLinkData={this.state.rentLinkData} path={this.props.location.pathname} />
+                            
                         </Col>
+                        {this.state.secondarySuggestionResults.slice(0, 5).map(secondarySuggestionResult => {
+                                    return <ListGroupItem className="secondary-suggestion-result" key={secondarySuggestionResult.geo_code} onClick={this.handleClick}>{secondarySuggestionResult.city}, {secondarySuggestionResult.state_code}</ListGroupItem>
+                                })}
                         <Col className="house-hidden-spacer d-none" sm={0} md={8} lg={2}></Col>
                         <Col className="buy-display py-2" id="house-area" sm={{ size: 12, offset: 0}} md={{ size: 12, offset: 0}} lg={{ size: 4, offset: 8}} xl={{ size: 6, offset: 6}}>
                             <Row>

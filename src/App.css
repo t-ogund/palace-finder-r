@@ -107,6 +107,11 @@
   margin: .3rem;
 }
 
+.secondary-suggestion-result {
+  /* position: absolute;
+  z-index: 10; */
+}
+
 .buy-input {
   margin: .3rem 0 .3rem 0;
 }
