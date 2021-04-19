@@ -18,7 +18,7 @@ class PropertyCard extends React.Component {
                 {/* <Row> */}
                     {/* <Col lg={6}> */}
                         <Card className="display-card">
-                            <CardImg className="img-fluid" top max-width="12rem" src={this.props.photo} alt="Test Image" />
+                            <CardImg top style={{height: "14rem"}} max-width="12rem" src={this.props.photo} alt="Test Image" />
                             <CardBody className="p-2 card-body">
                                 <div className="card-cost-and-details d-flex justify-content-between">
                                     <div className="card-cost-container">

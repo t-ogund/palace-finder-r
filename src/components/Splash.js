@@ -17,7 +17,8 @@ class Splash extends React.Component {
            buyData: [],
            selectedCity: null,
            selectedState: null,
-           selectedObject: null
+           selectedObject: null,
+           isLoading: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);

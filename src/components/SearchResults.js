@@ -269,20 +269,20 @@ class SearchResults extends React.Component {
                         <Col xl={2} lg={4} md={6}>
                             <InputGroup className="px-3">
                             
-                                <Input onChange={this.handleChange} className="buy-input" />
+                                {/* <Input onChange={this.handleChange} className="buy-input" />
                                 
-                                <InputGroupAddon className="buy-add-on" addonType="append"><Button onClick={this.handleClick} className="bg-white text-primary">Search</Button></InputGroupAddon>
+                                <InputGroupAddon className="buy-add-on" addonType="append"><Button onClick={this.handleClick} className="bg-white text-primary">Search</Button></InputGroupAddon> */}
                                 
                             </InputGroup>
                             
                         </Col>
                         <Col xl={10} lg={8} md={6} className="px-3">
-                            <Button outline color="primary" className="buy-filter-button" onClick={this.handleSaleRentToggle}>For Rent</Button>
+                            {/* <Button outline color="primary" className="buy-filter-button" onClick={this.handleSaleRentToggle}>For Rent</Button>
                             <Button outline color="primary" className="buy-filter-button">Price</Button>
                             <Button outline color="primary" className="buy-filter-button" id="bed-bath">Bed & Bath</Button>
                             <Button outline color="primary" className="buy-filter-button" id="home-type">Home Type</Button>
                             <Button outline color="primary" className="buy-filter-button">More</Button>
-                            <Button color="primary">Save Search</Button>
+                            <Button color="primary">Save Search</Button> */}
                         </Col>
                     </Row>
                 </Container>
