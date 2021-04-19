@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/palace-finder-r/static/css/main.7d2d688b.chunk.css",
+    "main.js": "/palace-finder-r/static/js/main.87f9bb2b.chunk.js",
+    "main.js.map": "/palace-finder-r/static/js/main.87f9bb2b.chunk.js.map",
+    "runtime-main.js": "/palace-finder-r/static/js/runtime-main.5795e50e.js",
+    "runtime-main.js.map": "/palace-finder-r/static/js/runtime-main.5795e50e.js.map",
+    "static/css/2.a7573f04.chunk.css": "/palace-finder-r/static/css/2.a7573f04.chunk.css",
+    "static/js/2.7eff9f99.chunk.js": "/palace-finder-r/static/js/2.7eff9f99.chunk.js",
+    "static/js/2.7eff9f99.chunk.js.map": "/palace-finder-r/static/js/2.7eff9f99.chunk.js.map",
+    "static/js/3.afcf92cf.chunk.js": "/palace-finder-r/static/js/3.afcf92cf.chunk.js",
+    "static/js/3.afcf92cf.chunk.js.map": "/palace-finder-r/static/js/3.afcf92cf.chunk.js.map",
+    "index.html": "/palace-finder-r/index.html",
+    "static/css/2.a7573f04.chunk.css.map": "/palace-finder-r/static/css/2.a7573f04.chunk.css.map",
+    "static/css/main.7d2d688b.chunk.css.map": "/palace-finder-r/static/css/main.7d2d688b.chunk.css.map",
+    "static/js/2.7eff9f99.chunk.js.LICENSE.txt": "/palace-finder-r/static/js/2.7eff9f99.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/palace-finder-r/static/media/house.4eb97745.jpg",
+    "static/media/tester-house.d5d673b7.jpg": "/palace-finder-r/static/media/tester-house.d5d673b7.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5795e50e.js",
+    "static/css/2.a7573f04.chunk.css",
+    "static/js/2.7eff9f99.chunk.js",
+    "static/css/main.7d2d688b.chunk.css",
+    "static/js/main.87f9bb2b.chunk.js"
+  ]
+}
