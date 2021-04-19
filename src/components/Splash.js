@@ -106,7 +106,6 @@ handleClick(e) {
             {this.state.buyData.length === 0 ? <Container fluid className="splash">
                 <Row className="d-flex justify-content-center align-items-center h-100">
                     <Col className="col-md-4">
-                        <h2>{this.state.query}</h2>
                         <InputGroup className="">
                             <Input placeholder='Enter city, i.e. "Minneapolis"' ref={ (input) => this.refCityState = input } onChange={this.handleChange} type="text" className="splash-input" />
                             <InputGroupAddon addonType="append">
