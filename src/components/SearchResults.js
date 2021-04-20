@@ -11,7 +11,7 @@ import { BrowserRouter, Route, Switch, Link, withRouter, Redirect } from "react-
 class SearchResults extends React.Component {
     constructor(props) {
         super();
-
+console.log(props)
         this.state = {
             inputQuery: "",
             selectedBuyData: props,
@@ -126,12 +126,13 @@ class SearchResults extends React.Component {
     render() {
         if (this.state.selectedBuyData.query !== "") {
             const array = this.state.selectedBuyData.location.state.body.data.results
+            console.log(this.state.selectedBuyData)
             
             const rows = array.reduce(function(rows, key, index) {
                 return (index % 2 == 0 ? rows.push([key]) : rows[rows.length-1].push(key)) && rows
             }, []);
       
-            var propertiesForSale = rows.map(row => (
+            var propertiesForSale = rows.map((row, index) => (
                                         
                 <Row>
                     { row.map(col => (
@@ -145,8 +146,9 @@ class SearchResults extends React.Component {
                         baths={col.description.baths + " ba"}
                         sqft={col.description.sqft + " sqft"}
                         address={col.permalink}
-                        lat={col.location.address.coordinate.lat}
-                        lon={col.location.address.coordinate.lon}
+                        // coordinate={col.location.address.coordinate === null ? console.log("New coordinate is NULL") : console.log("New coordinate is not NULL")}
+                        lat={col.location.address.coordinate === null ? console.log("Buy Lat is Null", index) : console.log("Buy lat is not null", index)}
+                        lon={col.location.address.coordinate === null ? console.log("Buy Lon is Null", index) : console.log("Buy lon is not null", index)}
                         photo={col.photo_count === 0 ? comingSoon : col.photos[0].href}
                         />}
                     </Col>
@@ -175,8 +177,8 @@ class SearchResults extends React.Component {
                     baths={rentCol.description.baths}
                     sqft={rentCol.description.sqft}
                     address={rentCol.permalink}
-                    lat={rentCol.location.address.coordinate.lat}
-                    lon={rentCol.location.address.coordinate.lon}
+                    lat={rentCol.location.address.coordinate === null ? console.log("Rent lat is Null") : console.log("Rent lat is not null")}
+                    lon={rentCol.location.address.coordinate === null ? console.log("Rent lon is Null") : console.log("Rent lon is not null")}
                     photo={rentCol.photo_count === 0 ? comingSoon : rentCol.photos[0].href}
                     />}
                 </Col>
@@ -218,6 +220,7 @@ class SearchResults extends React.Component {
         } else if (this.props.location.pathname === "/rent") {
 
             const rentLinkArray = this.state.rentLinkData;
+            console.log("RENT LINK ARRAY: ", this.state.rentLinkData)
 
             const rentLinkArrayRows = rentLinkArray.reduce(function(rentLinkArrayRows, key, index) {
                 return (index % 2 == 0 ? rentLinkArrayRows.push([key]) : rentLinkArrayRows[rentLinkArrayRows.length-1].push(key)) && rentLinkArrayRows
@@ -260,7 +263,7 @@ class SearchResults extends React.Component {
                 rentRender = propertiesForRent
             }
 
-
+console.log(propertiesForSale)
         return (
             <React.Fragment>
 

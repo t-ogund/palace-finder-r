@@ -55,9 +55,24 @@ handleChange(e) {
 handleClick(e) {
     const parsedCityState = e.target.textContent.split(" ")
     
-    const city = parsedCityState[0].slice(0, -1);
-    const state = parsedCityState[1]
-    let refCityState = `${city}, ${state}`;
+    const origCity = parsedCityState[0].slice(0, -1);
+    const origState = parsedCityState[1]
+    // let refCityState = `${city}, ${state}`;
+    let city;
+    let state
+    if (parsedCityState.length > 2) {
+        const compoundCity = `${parsedCityState[0]}%20${parsedCityState[1]}`.slice(0, -1)
+        const compoundState = parsedCityState.pop()
+        city = compoundCity
+        state = compoundState
+        console.log("COMPOUND CITY: ", city)
+        console.log("COMPOUND STATE: ", state)
+    } else {
+        city = origCity
+        state = origState
+        console.log("ORIG CITY: ", city)
+        console.log("ORIG STATE: ", state)
+    }
     console.log(parsedCityState)
     
   

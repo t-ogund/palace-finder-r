@@ -30,7 +30,7 @@ class Map extends React.Component {
                     defaultCenter={ this.props.center }
                     defaultZoom={ this.props.zoom }
                 >
-                {this.props.path === "/buy" ? exactLocationArray.map(marker => <MapMarker lat={marker.location.address.coordinate.lat} lng={marker.location.address.coordinate.lon} path={this.props.path} />) : exactSelectedRentLocationArray.map(rentalMarker => <MapMarker lat={rentalMarker.location.address.coordinate.lat} lng={rentalMarker.location.address.coordinate.lon} path={this.props.path} />)}
+                {this.props.path === "/buy" ? exactLocationArray.map(marker => <MapMarker lat={marker.location.address.coordinate && marker.location.address.coordinate.lat} lng={marker.location.address.coordinate && marker.location.address.coordinate.lon} path={this.props.path} />) : exactSelectedRentLocationArray.map(rentalMarker => <MapMarker lat={rentalMarker.location.address.coordinate && rentalMarker.location.address.coordinate.lat} lng={rentalMarker.location.address.coordinate && rentalMarker.location.address.coordinate.lon} path={this.props.path} />)}
     
                 </GoogleMapReact>
             </div>

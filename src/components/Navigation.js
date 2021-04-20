@@ -16,7 +16,7 @@ import { faChessRook } from '@fortawesome/free-solid-svg-icons'
               <Container>
                 <Navbar className="bg-white fixed-top">
                     <Nav>
-                        <NavbarBrand href="https://t-ogund.github.io/palace-finder-r/">PalaceFinder <FontAwesomeIcon icon={faChessRook}></FontAwesomeIcon></NavbarBrand>
+                        <NavbarBrand href="/">PalaceFinder <FontAwesomeIcon icon={faChessRook}></FontAwesomeIcon></NavbarBrand>
                         <NavItem>
                             <NavLink tag={Link} to="/buy">
                                 Buy
