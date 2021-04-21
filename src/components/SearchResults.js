@@ -149,7 +149,7 @@ console.log(props)
                         // coordinate={col.location.address.coordinate === null ? console.log("New coordinate is NULL") : console.log("New coordinate is not NULL")}
                         lat={col.location.address.coordinate === null ? console.log("Buy Lat is Null", index) : console.log("Buy lat is not null", index)}
                         lon={col.location.address.coordinate === null ? console.log("Buy Lon is Null", index) : console.log("Buy lon is not null", index)}
-                        photo={col.photo_count === 0 ? comingSoon : col.photos[0].href}
+                        photo={col.photo_count === 0 || col.photo_count === null? comingSoon : col.photos[0].href}
                         />}
                     </Col>
                     ))}
@@ -162,12 +162,15 @@ console.log(props)
         const rentalRows = rentalArray.reduce(function(rentalRows, key, index) {
             return (index % 2 == 0 ? rentalRows.push([key]) : rentalRows[rentalRows.length-1].push(key)) && rentalRows
         }, []);
+        console.log("RENTAL ARRAY: ", rentalRows)     
 
         var propertiesForRent = rentalRows.map(rentalRow => (
-                                    
+            
             <Row>
                 { rentalRow.map(rentCol => (
+                    
                 <Col xl={6} lg={12} md={6}>
+
                     {<PropertyCard 
                     key={rentCol.property_id}
                     type={rentCol.description.type}
@@ -179,7 +182,7 @@ console.log(props)
                     address={rentCol.permalink}
                     lat={rentCol.location.address.coordinate === null ? console.log("Rent lat is Null") : console.log("Rent lat is not null")}
                     lon={rentCol.location.address.coordinate === null ? console.log("Rent lon is Null") : console.log("Rent lon is not null")}
-                    photo={rentCol.photo_count === 0 ? comingSoon : rentCol.photos[0].href}
+                    photo={rentCol.photo_count === 0 || rentCol.photo_count === null ? comingSoon : rentCol.photos[0].href}
                     />}
                 </Col>
                 ))}
@@ -210,7 +213,7 @@ console.log(props)
                         address={buyLinkCol.permalink}
                         lat={buyLinkCol.location.address.coordinate.lat}
                         lon={buyLinkCol.location.address.coordinate.lon}
-                        photo={buyLinkCol.photo_count === 0 ? comingSoon : buyLinkCol.photos[0].href}
+                        photo={buyLinkCol.photo_count === 0 || buyLinkCol.photo_count === null ? comingSoon : buyLinkCol.photos[0].href}
                         />}
                     </Col>
                     ))}
@@ -242,7 +245,7 @@ console.log(props)
                         address={rentLinkCol.permalink}
                         lat={rentLinkCol.location.address.coordinate.lat}
                         lon={rentLinkCol.location.address.coordinate.lon}
-                        photo={rentLinkCol.photo_count === 0 ? comingSoon : rentLinkCol.photos[0].href}
+                        photo={rentLinkCol.photo_count === 0 || rentLinkCol.photo_count === null? comingSoon : rentLinkCol.photos[0].href}
                         />}
                     </Col>
                     ))}
