@@ -321,7 +321,7 @@ console.log(propertiesForSale)
                                         {/* <p>{this.state.selectedBuyData.location.state.body.data.count} Results</p> */}
                                     </div>
                                     <div className="result-filter">
-                                        <p>Sort By: Dropdown goes here</p>
+                                        {/* <p>Sort By: Dropdown goes here</p> */}
                                     </div>
                                 </Col>
                             </Row>
