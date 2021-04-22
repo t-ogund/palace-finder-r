@@ -1,8 +1,3 @@
-.display-card {
-  /* width: 20rem;
-  height: 17rem; */
-}
-
 .card-body {
   border-bottom: 5px solid #0275d8;
 }
@@ -84,10 +79,6 @@
   text-align: center;
 }
 
-/* .tile {
-  display: flex;
-} */
-
 .home-card-icons {
   font-size: 5rem;
   margin: 2rem auto;
@@ -98,18 +89,9 @@
   margin-bottom: 2rem;
 }
 
-/* .tile {
-  min-width: 20rem;
-} */
-
 /* BUY PAGE */
 .buy-filter-button {
   margin: .3rem;
-}
-
-.secondary-suggestion-result {
-  /* position: absolute;
-  z-index: 10; */
 }
 
 .buy-input {
@@ -135,13 +117,8 @@
   height: 100vh;
 }
 
-/* .house-hidden-spacer {
-  display: none;
-} */
-
 .buy-display {
   margin-top: 10rem;
-  /* display: flex; */
 }
 
 #house-area {

@@ -3,8 +3,6 @@ import {
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Row, Col, Button
   } from 'reactstrap';
-import tester from "../assets/tester-house.jpg";
-import comingSoon from "../assets/coming-soon.jpg";
 import PropertyMarker from "./PropertyMarker";
 
 class PropertyCard extends React.Component {
