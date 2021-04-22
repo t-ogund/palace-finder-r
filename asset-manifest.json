@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/palace-finder-r/static/css/main.6c86a4d8.chunk.css",
-    "main.js": "/palace-finder-r/static/js/main.8cbb65ea.chunk.js",
-    "main.js.map": "/palace-finder-r/static/js/main.8cbb65ea.chunk.js.map",
+    "main.js": "/palace-finder-r/static/js/main.ae69f2ab.chunk.js",
+    "main.js.map": "/palace-finder-r/static/js/main.ae69f2ab.chunk.js.map",
     "runtime-main.js": "/palace-finder-r/static/js/runtime-main.5795e50e.js",
     "runtime-main.js.map": "/palace-finder-r/static/js/runtime-main.5795e50e.js.map",
     "static/css/2.a7573f04.chunk.css": "/palace-finder-r/static/css/2.a7573f04.chunk.css",
@@ -21,6 +21,6 @@
     "static/css/2.a7573f04.chunk.css",
     "static/js/2.9cbca03a.chunk.js",
     "static/css/main.6c86a4d8.chunk.css",
-    "static/js/main.8cbb65ea.chunk.js"
+    "static/js/main.ae69f2ab.chunk.js"
   ]
 }
