@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import { HashRouter as BrowserRouter } from 'react-router-dom';
 
 
 ReactDOM.render(

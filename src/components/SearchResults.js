@@ -149,7 +149,7 @@ console.log(props)
                         // coordinate={col.location.address.coordinate === null ? console.log("New coordinate is NULL") : console.log("New coordinate is not NULL")}
                         lat={col.location.address.coordinate === null ? console.log("Buy Lat is Null", index) : console.log("Buy lat is not null", index)}
                         lon={col.location.address.coordinate === null ? console.log("Buy Lon is Null", index) : console.log("Buy lon is not null", index)}
-                        photo={col.photo_count === 0 || col.photo_count === null? comingSoon : col.photos[0].href}
+                        photo={col.photo_count === 0 || col.photo_count === null ? comingSoon : col.photos[0].href}
                         />}
                     </Col>
                     ))}
