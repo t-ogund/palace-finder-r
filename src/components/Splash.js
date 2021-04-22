@@ -5,7 +5,7 @@ ListGroup, ListGroupItem} from "reactstrap";
 import house from "../assets/house.jpg";
 import HomeBottom from "./HomeBottom";
 import SearchResults from "./SearchResults";
-import { BrowserRouter, Route, Switch, Link, withRouter, Redirect } from "react-router-dom";
+import { Route, Switch, Link, withRouter, Redirect } from "react-router-dom";
 
 class Splash extends React.Component {
     constructor(props) {
