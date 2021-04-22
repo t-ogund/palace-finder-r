@@ -122,7 +122,7 @@ handleClick(e) {
                 <Row className="d-flex justify-content-center align-items-center h-100">
                     <Col className="col-md-4">
                         <InputGroup className="">
-                            <Input placeholder='Enter city, i.e. "Minneapolis"' ref={ (input) => this.refCityState = input } onChange={this.handleChange} type="text" className="splash-input" />
+                            <Input placeholder='Enter city, i.e. "Los Angeles"' ref={ (input) => this.refCityState = input } onChange={this.handleChange} type="text" className="splash-input" />
                             <InputGroupAddon addonType="append">
                                 {/* <Button onClick={this.handleClick}>Search</Button> */}
                             </InputGroupAddon>
