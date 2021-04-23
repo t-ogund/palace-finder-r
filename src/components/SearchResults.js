@@ -130,35 +130,39 @@ console.log(props)
         if (this.state.selectedBuyData.query !== "") {
             const array = this.state.selectedBuyData.location.state.body.data.results
             console.log(this.state.selectedBuyData)
+
+            if (array.length > 0) {
+                const rows = array.reduce(function(rows, key, index) {
+                    return (index % 2 == 0 ? rows.push([key]) : rows[rows.length-1].push(key)) && rows
+                }, []);
+          
+                var propertiesForSale = rows.map((row, index) => (
+                                            
+                    <Row>
+                        { row.map(col => (
+                        <Col xl={6} lg={12} md={6}>
+                            {<PropertyCard 
+                            key={col.property_id}
+                            type={col.description.type}
+                            saleOrRent={col.flags.is_for_rent}
+                            cost={col.list_price} 
+                            beds={col.description.beds + " bds"}
+                            baths={col.description.baths + " ba"}
+                            sqft={col.description.sqft + " sqft"}
+                            address={col.permalink}
+                            // coordinate={col.location.address.coordinate === null ? console.log("New coordinate is NULL") : console.log("New coordinate is not NULL")}
+                            lat={col.location.address.coordinate === null ? console.log("Buy Lat is Null", index) : console.log("Buy lat is not null", index)}
+                            lon={col.location.address.coordinate === null ? console.log("Buy Lon is Null", index) : console.log("Buy lon is not null", index)}
+                            photo={col.photos === null ? comingSoon : col.photos[0].href}
+                            />}
+                        </Col>
+                        ))}
+                    </Row>
+                    
+                ))
+            }
             
-            const rows = array.reduce(function(rows, key, index) {
-                return (index % 2 == 0 ? rows.push([key]) : rows[rows.length-1].push(key)) && rows
-            }, []);
-      
-            var propertiesForSale = rows.map((row, index) => (
-                                        
-                <Row>
-                    { row.map(col => (
-                    <Col xl={6} lg={12} md={6}>
-                        {<PropertyCard 
-                        key={col.property_id}
-                        type={col.description.type}
-                        saleOrRent={col.flags.is_for_rent}
-                        cost={col.list_price} 
-                        beds={col.description.beds + " bds"}
-                        baths={col.description.baths + " ba"}
-                        sqft={col.description.sqft + " sqft"}
-                        address={col.permalink}
-                        // coordinate={col.location.address.coordinate === null ? console.log("New coordinate is NULL") : console.log("New coordinate is not NULL")}
-                        lat={col.location.address.coordinate === null ? console.log("Buy Lat is Null", index) : console.log("Buy lat is not null", index)}
-                        lon={col.location.address.coordinate === null ? console.log("Buy Lon is Null", index) : console.log("Buy lon is not null", index)}
-                        photo={col.photos === null ? comingSoon : col.photos[0].href}
-                        />}
-                    </Col>
-                    ))}
-                </Row>
-                
-            ))
+            
 
         
         const rentalArray = this.state.selectedRentData
@@ -273,7 +277,7 @@ console.log(props)
                 rentRender = propertiesForRent
             }
 
-console.log(propertiesForSale)
+// console.log(propertiesForSale)
         return (
             <React.Fragment>
 
