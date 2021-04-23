@@ -25,6 +25,19 @@ class Map extends React.Component {
         console.log("EXACT LOCATION ARRAY: ", this.props.infoToDisplay.location.state.body.data.results)
         const exactSelectedRentLocationArray = this.props.selectedRentData
         console.log("EXACT SELECTED RENT LOCATION ARRAY: ", Object.keys(exactSelectedRentLocationArray).length === 0)
+        if (Object.keys(exactLocationArray).length === 0 && Object.keys(exactSelectedRentLocationArray).length === 0) {
+            return(
+                <div className="map d-none d-lg-block">
+                <GoogleMapReact
+                    bootstrapURLKeys={{ key: 'AIzaSyDRJk0P6hhX0-X_oLwzaLgFs3LdA_3zYCY' }}
+                    defaultCenter={ this.props.center }
+                    defaultZoom={ this.props.zoom }
+                >
+    
+                </GoogleMapReact>
+            </div>
+            )
+        }
         if (Object.keys(exactSelectedRentLocationArray).length > 0) {
             return(
                 <div className="map d-none d-lg-block">

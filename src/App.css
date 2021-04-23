@@ -73,6 +73,8 @@
 
 .suggestion-result:hover {
   cursor: pointer;
+  background-color: #0275d8;
+  color: white;
 }
 
 .home-bottom-header {
