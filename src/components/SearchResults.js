@@ -67,6 +67,7 @@ console.log(props)
     
  
     componentDidMount() {
+        console.log(this.props.location.state)
         if (this.props.location.state) {
          
             fetch(`https://realtor-com-real-estate.p.rapidapi.com/for-rent?city=${this.props.location.state.city}&state_code=${this.props.location.state.state}&limit=10&offset=0`, {
@@ -78,9 +79,11 @@ console.log(props)
 })
 .then(response => response.json())
 .then(data => {
+    console.log("RENT DATA: ", data)
     this.setState({
         selectedRentData: data.data.results
     })
+    console.log(this.state.selectedRentData)
 })
 .catch(err => {
 	console.error(err);
@@ -149,7 +152,7 @@ console.log(props)
                         // coordinate={col.location.address.coordinate === null ? console.log("New coordinate is NULL") : console.log("New coordinate is not NULL")}
                         lat={col.location.address.coordinate === null ? console.log("Buy Lat is Null", index) : console.log("Buy lat is not null", index)}
                         lon={col.location.address.coordinate === null ? console.log("Buy Lon is Null", index) : console.log("Buy lon is not null", index)}
-                        photo={col.photo_count === 0 || col.photo_count === null ? comingSoon : col.photos[0].href}
+                        photo={col.photos === null ? comingSoon : col.photos[0].href}
                         />}
                     </Col>
                     ))}
@@ -157,38 +160,42 @@ console.log(props)
                 
             ))
 
+        
         const rentalArray = this.state.selectedRentData
-
-        const rentalRows = rentalArray.reduce(function(rentalRows, key, index) {
-            return (index % 2 == 0 ? rentalRows.push([key]) : rentalRows[rentalRows.length-1].push(key)) && rentalRows
-        }, []);
-        console.log("RENTAL ARRAY: ", rentalRows)     
-
-        var propertiesForRent = rentalRows.map(rentalRow => (
-            
-            <Row>
-                { rentalRow.map(rentCol => (
-                    
-                <Col xl={6} lg={12} md={6}>
-
-                    {<PropertyCard 
-                    key={rentCol.property_id}
-                    type={rentCol.description.type}
-                    saleOrRent={rentCol.flags.is_for_rent}
-                    cost={rentCol.list_price} 
-                    beds={rentCol.description.beds}
-                    baths={rentCol.description.baths}
-                    sqft={rentCol.description.sqft}
-                    address={rentCol.permalink}
-                    lat={rentCol.location.address.coordinate === null ? console.log("Rent lat is Null") : console.log("Rent lat is not null")}
-                    lon={rentCol.location.address.coordinate === null ? console.log("Rent lon is Null") : console.log("Rent lon is not null")}
-                    photo={rentCol.photo_count === 0 || rentCol.photo_count === null ? comingSoon : rentCol.photos[0].href}
-                    />}
-                </Col>
-                ))}
-            </Row>
-            
-        ))
+        if (rentalArray.length > 0) {
+            console.log(rentalArray)
+            const rentalRows = rentalArray.reduce(function(rentalRows, key, index) {
+                return (index % 2 == 0 ? rentalRows.push([key]) : rentalRows[rentalRows.length-1].push(key)) && rentalRows
+            }, []);
+            console.log("RENTAL ARRAY: ", rentalRows)     
+    
+            var propertiesForRent = rentalRows.map(rentalRow => (
+                
+                <Row>
+                    { rentalRow.map(rentCol => (
+                        
+                    <Col xl={6} lg={12} md={6}>
+    
+                        {<PropertyCard 
+                        key={rentCol.property_id}
+                        type={rentCol.description.type}
+                        saleOrRent={rentCol.flags.is_for_rent}
+                        cost={rentCol.list_price} 
+                        beds={rentCol.description.beds}
+                        baths={rentCol.description.baths}
+                        sqft={rentCol.description.sqft}
+                        address={rentCol.permalink}
+                        lat={rentCol.location.address.coordinate === null ? console.log("Rent lat is Null") : console.log("Rent lat is not null")}
+                        lon={rentCol.location.address.coordinate === null ? console.log("Rent lon is Null") : console.log("Rent lon is not null")}
+                        photo={rentCol.photo_count === 0 || rentCol.photo_count === null ? comingSoon : rentCol.photos[0].href}
+                        />}
+                    </Col>
+                    ))}
+                </Row>
+                
+            ))
+        }
+        
         } else if (this.props.location.pathname === "/buy") {
 
             const buyLinkArray = this.state.buyLinkData;
