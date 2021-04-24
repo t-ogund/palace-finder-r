@@ -57,7 +57,6 @@ handleClick(e) {
     
     const origCity = parsedCityState[0].slice(0, -1);
     const origState = parsedCityState[1]
-    // let refCityState = `${city}, ${state}`;
     let city;
     let state
     if (parsedCityState.length > 2) {
@@ -124,8 +123,8 @@ handleClick(e) {
             {this.state.buyData.length === 0 ? <Container fluid className="splash">
                 <Row className="d-flex justify-content-center align-items-center h-100">
                     <Col className="col-md-4">
-                        <InputGroup className="">
-                            <Input placeholder='Enter city, i.e. "Los Angeles"' ref={ (input) => this.refCityState = input } onChange={this.handleChange} type="text" className="splash-input" />
+                        <InputGroup>
+                            <Input placeholder='Enter city, i.e. "Los Angeles"' onChange={this.handleChange} type="text" className="splash-input" />
                             <InputGroupAddon addonType="append">
                                 {/* <Button onClick={this.handleClick}>Search</Button> */}
                             </InputGroupAddon>

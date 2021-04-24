@@ -1,12 +1,9 @@
 import React from "react";
-import { Row, Col, Container, Button,
-     Input, InputGroup, InputGroupAddon, ListGroupItem } from "reactstrap";
+import { Row, Col, Container, InputGroup, ListGroupItem } from "reactstrap";
 import PropertyCard from "./PropertyCard";
 import Map from "./Map";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import comingSoon from "../assets/coming-soon.jpg";
-import { BrowserRouter, Route, Switch, Link, withRouter, Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 class SearchResults extends React.Component {
     constructor(props) {
@@ -23,45 +20,11 @@ console.log(props)
         }
         let searchValue
         searchValue = `${this.state.selectedBuyData.city}, ${this.state.selectedBuyData.state}`
-        
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-    handleChange(e) {
-//         this.setState({
-//             inputQuery: e.target.value
-//         })
-//         if (this.state.inputQuery.length > 3) {
-//             fetch(`https://realtor-com-real-estate.p.rapidapi.com/location/suggest?input=${this.state.inputQuery}`, {
-// 	"method": "GET",
-// 	"headers": {
-// 		"x-rapidapi-key": "b83c4c021amsh3983c7298d63292p1155a9jsnaa9b026a3b17",
-// 		"x-rapidapi-host": "realtor-com-real-estate.p.rapidapi.com"
-// 	}
-// })
-// .then(response => response.json())
-// .then(body => {
-//     console.log("BODY.DATA: ", body.data)
-//     this.setState({
-//         secondarySuggestionResults: body.data
-//     })
-//     console.log(this.state.secondarySuggestionResults.slice(0, 5))
-
-// })
-// .catch(err => {
-// 	console.error(err);
-// });
-//         }
-        
     }
 
     handleSaleRentToggle(e) {
         e.preventDefault()
         e.target.textContent = "For Sale"
-    }
-
-    handleClick(e) {
-        // console.log(e.target.parentElement.parentElement.children[0].value)
     }
     
  
@@ -151,7 +114,6 @@ console.log(props)
                             baths={col.description.baths + " ba"}
                             sqft={col.description.sqft + " sqft"}
                             address={col.permalink}
-                            // coordinate={col.location.address.coordinate === null ? console.log("New coordinate is NULL") : console.log("New coordinate is not NULL")}
                             lat={col.location.address.coordinate === null ? console.log("Buy Lat is Null", index) : console.log("Buy lat is not null", index)}
                             lon={col.location.address.coordinate === null ? console.log("Buy Lon is Null", index) : console.log("Buy lon is not null", index)}
                             photo={col.photos === null ? comingSoon : col.photos[0].href}
@@ -258,7 +220,7 @@ console.log(props)
                         address={rentLinkCol.permalink}
                         lat={rentLinkCol.location.address.coordinate.lat}
                         lon={rentLinkCol.location.address.coordinate.lon}
-                        photo={rentLinkCol.photo_count === 0 || rentLinkCol.photo_count === null? comingSoon : rentLinkCol.photos[0].href}
+                        photo={rentLinkCol.photo_count === 0 || rentLinkCol.photo_count === null ? comingSoon : rentLinkCol.photos[0].href}
                         />}
                     </Col>
                     ))}
@@ -279,7 +241,6 @@ console.log(props)
                 rentRender = propertiesForRent
             }
 
-// console.log(propertiesForSale)
         return (
             <React.Fragment>
 
