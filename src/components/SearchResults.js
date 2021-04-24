@@ -57,7 +57,6 @@ console.log(props)
 
     handleSaleRentToggle(e) {
         e.preventDefault()
-        console.log("hihi");
         e.target.textContent = "For Sale"
     }
 
@@ -127,7 +126,9 @@ console.log(props)
     }
     
     render() {
-        if (this.state.selectedBuyData.query !== "") {
+        if (this.state.selectedBuyData.query !== "" && this.state.selectedBuyData.location.state !== undefined) {
+            console.log(this.state.selectedBuyData)
+
             const array = this.state.selectedBuyData.location.state.body.data.results
             console.log(this.state.selectedBuyData)
 
@@ -166,6 +167,7 @@ console.log(props)
 
         
         const rentalArray = this.state.selectedRentData
+        console.log("SELECTED RENT DATA: ", this.state.selectedRentData)
         if (rentalArray.length > 0) {
             console.log(rentalArray)
             const rentalRows = rentalArray.reduce(function(rentalRows, key, index) {
@@ -322,7 +324,7 @@ console.log(props)
                             <Row>
                                 <Col>
                                     <h5> Real Estate & Homes for {this.props.match.path === "/buy" ? "Sale" : "Rent" }</h5>
-                                    
+                                    {/* {Object.keys(this.state.selectedBuyData.location.state.body.data.results).length === 0 && Object.keys(this.state.selectedRentData).length === 0 ? <h6>No Results</h6> : null} */}
                                 </Col>
                             </Row>
                         

@@ -106,7 +106,10 @@ handleClick(e) {
 }
 
     render() {
-        const results = this.state.suggestionResults.slice(0, 5)
+        let results
+        if (Object.keys(this.state.suggestionResults).length > 0) {
+            results = this.state.suggestionResults.slice(0, 5)
+        }
     return (
         <React.Fragment>
             <Switch>
@@ -129,9 +132,9 @@ handleClick(e) {
                         </InputGroup>
                         <ListGroup>
                             {
-                                results.map((result) => {
+                                results ? results.map((result) => {
                                     return <ListGroupItem key={result.geo_id} className="suggestion-result" onClick={this.handleClick}>{result.city}, {result.state_code}</ListGroupItem>
-                                })
+                                }) : null
                             }
                         </ListGroup>
                     </Col>
